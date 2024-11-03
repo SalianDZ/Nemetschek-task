@@ -29,9 +29,9 @@ namespace Hierarchy.Data.Models
         [ForeignKey("Supervisor")]
         public int? SupervisorID { get; set; }
 
-        public Position Position { get; set; }
-        public Department Department { get; set; }
-        public Employee Supervisor { get; set; }
+        public Position Position { get; set; } = null!;
+        public Department Department { get; set; } = null!;
+        public Employee Supervisor { get; set; } = null!;
         public ICollection<Employee> Subordinates { get; set; }
 
     }
