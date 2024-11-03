@@ -4,7 +4,7 @@ namespace Hierarchy.Data
 {
     public class HierarchyDbContext : DbContext
     {
-        public HierarchyDbContext(DbContextOptions<HierarchyDbContext> options)
+        public HierarchyDbContext(DbContextOptions<HierarchyDbContext> options) : base(options)
         {
             
         }

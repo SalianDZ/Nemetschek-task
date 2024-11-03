@@ -1,3 +1,6 @@
+using Hierarchy.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace Hierarchy.Web
 {
     public class Program
@@ -8,6 +11,10 @@ namespace Hierarchy.Web
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            builder.Services.AddDbContext<HierarchyDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 
             var app = builder.Build();
 

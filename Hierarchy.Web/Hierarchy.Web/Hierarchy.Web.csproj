@@ -15,4 +15,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hierarchy.Data\Hierarchy.Data.csproj" />
+  </ItemGroup>
+
 </Project>
