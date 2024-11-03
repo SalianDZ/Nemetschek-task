@@ -1,5 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Hierarchy.Data.Models.Enums;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using static Hierarchy.Common.EntityValidations.Employee;
 
 namespace Hierarchy.Data.Models
 {
@@ -15,7 +17,11 @@ namespace Hierarchy.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
+
+        [Required]
+        public Gender Gender { get; set; }
 
         [Required]
         public int ExperienceYears { get; set; }
