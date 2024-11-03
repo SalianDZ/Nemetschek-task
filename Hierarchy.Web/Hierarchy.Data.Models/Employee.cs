@@ -11,6 +11,7 @@ namespace Hierarchy.Data.Models
         {
             Id = Guid.NewGuid();    
             Subordinates = new HashSet<Employee>();
+            EmployeeProjects = new HashSet<EmployeeProject>();
         }
 
         [Key]
@@ -39,6 +40,8 @@ namespace Hierarchy.Data.Models
         public Department Department { get; set; } = null!;
         public Employee Supervisor { get; set; } = null!;
         public ICollection<Employee> Subordinates { get; set; }
+
+        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
 
     }
 }
