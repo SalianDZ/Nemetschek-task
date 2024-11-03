@@ -19,6 +19,9 @@ namespace Hierarchy.Data.Models
         [Required]
         public int Rank { get; set; }
 
+        [Required]
+        public bool IsSupervisor { get; set; }
+
         public ICollection<Employee> Employees { get; set; }
     }
 }
