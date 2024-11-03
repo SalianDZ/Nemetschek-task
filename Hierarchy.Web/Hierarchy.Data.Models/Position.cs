@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using static Hierarchy.Common.EntityValidations;
 
 namespace Hierarchy.Data.Models
 {
@@ -14,6 +15,7 @@ namespace Hierarchy.Data.Models
         public Guid Id { get; set; }
 
         [Required]
+        [MaxLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]

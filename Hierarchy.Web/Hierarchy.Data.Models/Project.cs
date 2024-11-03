@@ -3,26 +3,29 @@ using static Hierarchy.Common.EntityValidations;
 
 namespace Hierarchy.Data.Models
 {
-    public class Department
+    public class Project
     {
-        public Department()
+        public Project()
         {
             Id = Guid.NewGuid();
-            Employees = new HashSet<Employee>();
+            EmployeeProjects = new HashSet<EmployeeProject>();
         }
 
-
-        [Key]
         public Guid Id { get; set; }
 
         [Required]
-        [MaxLength(NameMaxLength)]
+        [StringLength(NameMaxLength)]
         public string Name { get; set; } = null!;
 
         [Required]
         [MaxLength(DescriptionMaxLength)]
         public string Description { get; set; } = null!;
 
-        public ICollection<Employee> Employees { get; set; }
+        [Required]
+        public DateTime StartDate { get; set; }
+
+        public DateTime? EndDate { get; set; }
+
+        public ICollection<EmployeeProject> EmployeeProjects { get; set; }
     }
 }
