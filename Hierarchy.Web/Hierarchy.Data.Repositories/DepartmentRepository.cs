@@ -13,19 +13,25 @@ namespace Hierarchy.Data.Repositories
             this.context = context;
         }
 
-        public Task AddDepartmentAsync(Department department)
+        public async Task AddDepartmentAsync(Department department)
         {
-            throw new NotImplementedException();
+            await context.Departments.AddAsync(department);
+            await context.SaveChangesAsync();
         }
 
-        public Task DeleteDepartmentAsync(Guid id)
+        public async Task DeleteDepartmentAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var department = await GetDepartmentByIdAsync(id);
+            if (department != null)
+            {
+                context.Departments.Remove(department);
+                await context.SaveChangesAsync();
+            }
         }
 
-        public Task<IEnumerable<Department>> GetAllDepartmentsAsync()
+        public async Task<IEnumerable<Department>> GetAllDepartmentsAsync()
         {
-            throw new NotImplementedException();
+            return await context.Departments.ToListAsync();
         }
 
         public async Task<Department> GetDepartmentByIdAsync(Guid id)
@@ -33,9 +39,10 @@ namespace Hierarchy.Data.Repositories
             return await context.Departments.FindAsync(id);
         }
 
-        public Task UpdateDepartmentAsync(Department department)
+        public async Task UpdateDepartmentAsync(Department department)
         {
-            throw new NotImplementedException();
+            context.Departments.Update(department);
+            await context.SaveChangesAsync();
         }
     }
 }
