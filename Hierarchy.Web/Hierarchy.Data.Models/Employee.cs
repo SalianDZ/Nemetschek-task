@@ -28,13 +28,13 @@ namespace Hierarchy.Data.Models
         public int ExperienceYears { get; set; }
 
         [ForeignKey("Position")]
-        public int PositionID { get; set; }
+        public Guid PositionID { get; set; }
 
         [ForeignKey("Department")]
-        public int DepartmentID { get; set; }
+        public Guid DepartmentID { get; set; }
 
         [ForeignKey("Supervisor")]
-        public int? SupervisorID { get; set; }
+        public Guid? SupervisorID { get; set; }
 
         public Position Position { get; set; } = null!;
         public Department Department { get; set; } = null!;
