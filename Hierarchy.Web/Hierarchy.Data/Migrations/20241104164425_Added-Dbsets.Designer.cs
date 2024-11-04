@@ -4,6 +4,7 @@ using Hierarchy.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Hierarchy.Data.Migrations
 {
     [DbContext(typeof(HierarchyDbContext))]
-    partial class HierarchyDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241104164425_Added-Dbsets")]
+    partial class AddedDbsets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

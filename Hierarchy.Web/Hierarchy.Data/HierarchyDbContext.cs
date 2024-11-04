@@ -10,6 +10,16 @@ namespace Hierarchy.Data
             
         }
 
+        public DbSet<Department> Departments { get; set; } = null!;
+
+        public DbSet<Position> Positions { get; set; } = null!;
+
+        public DbSet<Employee> Employees { get; set; } = null!;
+
+        public DbSet<EmployeeProject> EmployeeProjects { get; set; } = null!;
+
+        public DbSet<Project> Projects { get; set; } = null!;
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<EmployeeProject>()
