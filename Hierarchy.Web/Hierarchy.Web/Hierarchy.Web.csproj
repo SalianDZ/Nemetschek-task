@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -17,6 +17,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Hierarchy.Data\Hierarchy.Data.csproj" />
+    <ProjectReference Include="..\Hierarchy.Services.Data\Hierarchy.Services.Data.csproj" />
+    <ProjectReference Include="..\Hierarchy.Web.Models\Hierarchy.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>
