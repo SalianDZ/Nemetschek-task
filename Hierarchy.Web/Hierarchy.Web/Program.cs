@@ -1,5 +1,9 @@
 using Hierarchy.Data;
+using Hierarchy.Data.Repositories.Interfaces;
+using Hierarchy.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Hierarchy.Services.Data.Interfaces;
+using Hierarchy.Services.Data;
 
 namespace Hierarchy.Web
 {
@@ -15,6 +19,9 @@ namespace Hierarchy.Web
             builder.Services.AddDbContext<HierarchyDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 
             var app = builder.Build();
 
