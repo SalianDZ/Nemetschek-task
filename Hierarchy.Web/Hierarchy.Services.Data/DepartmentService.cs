@@ -13,6 +13,11 @@ namespace Hierarchy.Services.Data
                 this.departmentRepository = departmentRepository;
         }
 
+        public Task AddDepartmentAsync(DepartmentFormViewModel departmentViewModel)
+        {
+            throw new ArgumentException(); 
+        }
+
         public async Task<IEnumerable<DepartmentListViewModel>> GetAllDepartmentsAsync()
         {
             var departments = await departmentRepository.GetAllDepartmentsWithEmployeesAsync();

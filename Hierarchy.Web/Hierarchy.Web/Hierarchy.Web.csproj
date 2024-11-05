@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Hierarchy.Common\Hierarchy.Common.csproj" />
     <ProjectReference Include="..\Hierarchy.Data\Hierarchy.Data.csproj" />
     <ProjectReference Include="..\Hierarchy.Services.Data\Hierarchy.Services.Data.csproj" />
     <ProjectReference Include="..\Hierarchy.Web.Models\Hierarchy.Web.Models.csproj" />
