@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Hierarchy.Data.Repositories\Hierarchy.Data.Repositories.csproj" />
+    <ProjectReference Include="..\Hierarchy.Web.Models\Hierarchy.Web.Models.csproj" />
+  </ItemGroup>
+
 </Project>

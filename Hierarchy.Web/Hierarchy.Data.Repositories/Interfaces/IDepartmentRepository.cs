@@ -9,5 +9,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task AddDepartmentAsync(Department department);
         Task UpdateDepartmentAsync(Department department);
         Task DeleteDepartmentAsync(Guid id);
+        Task<IEnumerable<Department>> GetAllDepartmentsWithEmployeesAsync();
     }
 }

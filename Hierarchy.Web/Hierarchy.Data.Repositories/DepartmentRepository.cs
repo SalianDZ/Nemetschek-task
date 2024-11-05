@@ -44,5 +44,12 @@ namespace Hierarchy.Data.Repositories
             context.Departments.Update(department);
             await context.SaveChangesAsync();
         }
+
+        public async Task<IEnumerable<Department>> GetAllDepartmentsWithEmployeesAsync()
+        {
+            return await context.Departments
+                .Include(d => d.Employees)
+                .ToListAsync();
+        }
     }
 }
