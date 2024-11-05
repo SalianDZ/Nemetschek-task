@@ -1,4 +1,5 @@
-﻿using Hierarchy.Data.Repositories.Interfaces;
+﻿using Hierarchy.Data.Models;
+using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models;
 
@@ -13,9 +14,12 @@ namespace Hierarchy.Services.Data
                 this.departmentRepository = departmentRepository;
         }
 
-        public Task AddDepartmentAsync(DepartmentFormViewModel departmentViewModel)
+        public async Task AddDepartmentAsync(DepartmentFormViewModel departmentViewModel)
         {
-            throw new ArgumentException(); 
+            Department department = new();
+            department.Name = departmentViewModel.Name;
+            department.Description = departmentViewModel.Description;
+            await departmentRepository.AddDepartmentAsync(department);
         }
 
         public async Task<IEnumerable<DepartmentListViewModel>> GetAllDepartmentsAsync()

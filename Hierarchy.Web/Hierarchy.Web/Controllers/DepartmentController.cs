@@ -34,5 +34,25 @@ namespace Hierarchy.Web.Controllers
                 return View("Error");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(DepartmentFormViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                await departmentService.AddDepartmentAsync(model);
+                return RedirectToAction("All", "Department");
+            }
+            catch (Exception)
+            {
+
+                return View("Error");
+            }
+        }
     }
 }
