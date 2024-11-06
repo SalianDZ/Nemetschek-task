@@ -51,5 +51,13 @@ namespace Hierarchy.Data.Repositories
                 .Include(d => d.Employees)
                 .ToListAsync();
         }
-    }
+
+		public async Task<Department> GetDepartmentWithEmployeesByIdAsync(Guid departmentId)
+		{
+			return await context.Departments
+				.Include(d => d.Employees) // Eager load the Employees navigation property
+				.ThenInclude(e => e.Position) // Optionally load Position details for each Employee, if available
+				.FirstOrDefaultAsync(d => d.Id == departmentId);
+		}
+	}
 }

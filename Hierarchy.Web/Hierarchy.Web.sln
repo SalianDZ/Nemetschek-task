@@ -17,13 +17,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hierarchy.Data", "Hierarchy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hierarchy.Data.Models", "Hierarchy.Data.Models\Hierarchy.Data.Models.csproj", "{6492150C-481C-43EC-A0CD-0B5237584F33}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hierarchy.Services.Data", "Hierarchy.Services.Data\Hierarchy.Services.Data.csproj", "{9DABE317-D531-4B2A-9AF5-4791537626BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hierarchy.Services.Data", "Hierarchy.Services.Data\Hierarchy.Services.Data.csproj", "{9DABE317-D531-4B2A-9AF5-4791537626BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hierarchy.Services.Data.Models", "Hierarchy.Services.Data.Models\Hierarchy.Services.Data.Models.csproj", "{691DC78B-C373-44F4-B797-2596AAE07E23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hierarchy.Data.Repositories", "Hierarchy.Data.Repositories\Hierarchy.Data.Repositories.csproj", "{D9607C6C-3D99-4EA6-9DB6-74647E4513C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hierarchy.Data.Repositories", "Hierarchy.Data.Repositories\Hierarchy.Data.Repositories.csproj", "{D9607C6C-3D99-4EA6-9DB6-74647E4513C7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hierarchy.Web.Models", "Hierarchy.Web.Models\Hierarchy.Web.Models.csproj", "{44C8B8E6-DCB3-4283-ACB1-B148AF5B4B8E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hierarchy.Web.Models", "Hierarchy.Web.Models\Hierarchy.Web.Models.csproj", "{44C8B8E6-DCB3-4283-ACB1-B148AF5B4B8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,10 +49,6 @@ Global
 		{9DABE317-D531-4B2A-9AF5-4791537626BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9DABE317-D531-4B2A-9AF5-4791537626BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9DABE317-D531-4B2A-9AF5-4791537626BB}.Release|Any CPU.Build.0 = Release|Any CPU
-		{691DC78B-C373-44F4-B797-2596AAE07E23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{691DC78B-C373-44F4-B797-2596AAE07E23}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{691DC78B-C373-44F4-B797-2596AAE07E23}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{691DC78B-C373-44F4-B797-2596AAE07E23}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D9607C6C-3D99-4EA6-9DB6-74647E4513C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D9607C6C-3D99-4EA6-9DB6-74647E4513C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D9607C6C-3D99-4EA6-9DB6-74647E4513C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,7 +66,6 @@ Global
 		{4C273405-14C4-4AB1-9E4B-D9175597EBE9} = {B42FB1E9-70AB-47F7-B773-973DE6E82503}
 		{6492150C-481C-43EC-A0CD-0B5237584F33} = {B42FB1E9-70AB-47F7-B773-973DE6E82503}
 		{9DABE317-D531-4B2A-9AF5-4791537626BB} = {8D7636BF-3AB6-4A34-8C6E-03FDB0CBE431}
-		{691DC78B-C373-44F4-B797-2596AAE07E23} = {8D7636BF-3AB6-4A34-8C6E-03FDB0CBE431}
 		{D9607C6C-3D99-4EA6-9DB6-74647E4513C7} = {B42FB1E9-70AB-47F7-B773-973DE6E82503}
 		{44C8B8E6-DCB3-4283-ACB1-B148AF5B4B8E} = {0AC5DEBD-603D-40C1-8283-F465F712B867}
 	EndGlobalSection

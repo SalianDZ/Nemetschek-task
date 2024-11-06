@@ -1,6 +1,6 @@
 ﻿using Hierarchy.Services.Data;
 using Hierarchy.Services.Data.Interfaces;
-using Hierarchy.Web.Models;
+using Hierarchy.Web.Models.Department;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hierarchy.Web.Controllers
@@ -50,9 +50,23 @@ namespace Hierarchy.Web.Controllers
             }
             catch (Exception)
             {
-
                 return View("Error");
             }
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            try
+            {
+                var department = await departmentService.GetDepartmentDetailsAsync(Guid.Parse(id));
+
+				// No need for additional null checks since the service always returns a valid view model
+				return View(department);
+			}
+            catch (Exception)
+            {
+				return View("Error");
+			}
         }
     }
 }

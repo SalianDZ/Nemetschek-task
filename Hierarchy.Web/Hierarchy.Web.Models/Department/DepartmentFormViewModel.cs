@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using static Hierarchy.Common.EntityValidations;
 
-namespace Hierarchy.Web.Models
+namespace Hierarchy.Web.Models.Department
 {
     public class DepartmentFormViewModel
     {

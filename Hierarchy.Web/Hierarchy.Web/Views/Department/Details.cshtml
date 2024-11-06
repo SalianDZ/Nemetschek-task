@@ -1,0 +1,35 @@
+﻿@model DepartmentDetailViewModel
+
+<h2>Department Details</h2>
+
+<div class="department-details">
+    <h3>@Model.Name</h3>
+    <p><strong>Description:</strong> @Model.Description</p>
+</div>
+
+<h4>Employees in this Department</h4>
+
+@if (Model.Employees != null && Model.Employees.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Employee Name</th>
+                <th>Position</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var employee in Model.Employees)
+            {
+                <tr>
+                    <td>@employee.EmployeeName</td>
+                    <td>@employee.Position</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No employees are assigned to this department.</p>
+}

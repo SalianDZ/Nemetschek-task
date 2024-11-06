@@ -1,4 +1,4 @@
-﻿namespace Hierarchy.Web.Models
+﻿namespace Hierarchy.Web.Models.Department
 {
     public class DepartmentListViewModel
     {

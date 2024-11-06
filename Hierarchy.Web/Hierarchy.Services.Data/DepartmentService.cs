@@ -1,11 +1,12 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
-using Hierarchy.Web.Models;
+using Hierarchy.Web.Models.Department;
+using Hierarchy.Web.Models.Employee;
 
 namespace Hierarchy.Services.Data
 {
-    public class DepartmentService : IDepartmentService
+	public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository departmentRepository;
 
@@ -35,6 +36,31 @@ namespace Hierarchy.Services.Data
             }).ToList();
         }
 
+		public async Task<DepartmentDetailViewModel> GetDepartmentDetailsAsync(Guid departmentId)
+		{
+			var department = await departmentRepository.GetDepartmentWithEmployeesByIdAsync(departmentId);
 
-    }
+			if (department == null)
+			{
+				return new DepartmentDetailViewModel
+				{
+					Name = "Department Not Found",
+					Description = "The requested department does not exist.",
+					Employees = new List<EmployeeViewModel>() // Empty list for employees
+				};
+			}
+
+			// Map to DepartmentDetailViewModel
+			return new DepartmentDetailViewModel
+			{
+				Name = department.Name,
+				Description = department.Description,
+				Employees = department.Employees?.Select(e => new EmployeeViewModel
+				{
+					EmployeeName = e.Name,
+					Position = e.Position?.Name // Assuming Position is a navigation property in Employee
+				}).ToList()
+			};
+		}
+	}
 }
