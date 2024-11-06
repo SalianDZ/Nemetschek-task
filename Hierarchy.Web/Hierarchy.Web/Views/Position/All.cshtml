@@ -1,0 +1,14 @@
+﻿@model IEnumerable<PositionListViewModel>
+
+<h2>Positions</h2>
+<ul>
+    @foreach (var position in Model)
+
+    {
+        <li>
+            <a href="@Url.Action("Details", "Position", new { id = position.PositionID })">
+                @position.Name
+            </a> - @position.EmployeeCount employees
+        </li>
+    }
+</ul>

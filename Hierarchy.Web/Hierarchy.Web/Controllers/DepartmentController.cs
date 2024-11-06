@@ -17,8 +17,15 @@ namespace Hierarchy.Web.Controllers
 
         public async Task<IActionResult> All()
         {
-            var departments = await departmentService.GetAllDepartmentsAsync();
-            return View(departments);
+            try
+            {
+				var departments = await departmentService.GetAllDepartmentsAsync();
+				return View(departments);
+			}
+            catch (Exception)
+            {
+				return View("Error");
+			}
         }
 
         [HttpGet]

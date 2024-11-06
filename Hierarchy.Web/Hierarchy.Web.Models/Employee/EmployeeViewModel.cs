@@ -4,5 +4,6 @@
 	{
 		public string EmployeeName { get; set; } = null!;
 		public string Position { get; set; } = null!;
-	}
+		public string Department { get; set; } = null!;
+    }
 }

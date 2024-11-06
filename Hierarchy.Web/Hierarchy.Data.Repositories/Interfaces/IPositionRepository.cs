@@ -9,5 +9,7 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task AddPositionAsync(Position position);
         Task UpdatePositionAsync(Position position);
         Task DeletePositionAsync(Guid id);
-    }
+		Task<IEnumerable<Position>> GetAllPositionsWithEmployeesAsync();
+		Task<Position> GetPositionWithEmployeesByIdAsync(Guid positionId);
+	}
 }

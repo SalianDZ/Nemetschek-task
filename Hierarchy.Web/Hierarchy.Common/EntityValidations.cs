@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-
-namespace Hierarchy.Common
+﻿namespace Hierarchy.Common
 {
-    public static class EntityValidations
+	public static class EntityValidations
     {
         public const int NameMinLength = 3;
         public const int NameMaxLength = 100;
@@ -15,5 +13,8 @@ namespace Hierarchy.Common
 
         public const int DescriptionMinLength = 5;
         public const int DescriptionMaxLength = 500;
+
+        public const int RankMinValue = 1;
+        public const int RankMaxValue = 10;
     }
 }

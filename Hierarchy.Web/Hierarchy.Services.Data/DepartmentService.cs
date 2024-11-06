@@ -58,7 +58,8 @@ namespace Hierarchy.Services.Data
 				Employees = department.Employees?.Select(e => new EmployeeViewModel
 				{
 					EmployeeName = e.Name,
-					Position = e.Position?.Name // Assuming Position is a navigation property in Employee
+					Position = e.Position?.Name, // Assuming Position is a navigation property in Employee
+					Department = e.Department?.Name
 				}).ToList()
 			};
 		}

@@ -20,10 +20,12 @@ namespace Hierarchy.Web
                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+			builder.Services.AddScoped<IPositionRepository, PositionRepository>();
 
-            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+			builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+			builder.Services.AddScoped<IPositionService, PositionService>();
 
-            var app = builder.Build();
+			var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

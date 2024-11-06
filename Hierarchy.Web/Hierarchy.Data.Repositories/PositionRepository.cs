@@ -33,12 +33,27 @@ namespace Hierarchy.Data.Repositories
             return await context.Positions.ToListAsync();
         }
 
-        public async Task<Position> GetPositionByIdAsync(Guid id)
+		public async Task<IEnumerable<Position>> GetAllPositionsWithEmployeesAsync()
+		{
+			return await context.Positions
+				.Include(p => p.Employees)
+				.ToListAsync();
+		}
+
+		public async Task<Position> GetPositionByIdAsync(Guid id)
         {
             return await context.Positions.FindAsync(id);
         }
 
-        public async Task UpdatePositionAsync(Position position)
+		public async Task<Position> GetPositionWithEmployeesByIdAsync(Guid positionId)
+		{
+			return await context.Positions
+				.Include(p => p.Employees)
+				.ThenInclude(e => e.Department)
+				.FirstOrDefaultAsync(p => p.Id == positionId);
+		}
+
+		public async Task UpdatePositionAsync(Position position)
         {
             context.Positions.Update(position);
             await context.SaveChangesAsync();
