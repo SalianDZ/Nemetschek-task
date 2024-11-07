@@ -21,11 +21,13 @@ namespace Hierarchy.Web
 
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 			builder.Services.AddScoped<IPositionRepository, PositionRepository>();
+            builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
 
-			builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 			builder.Services.AddScoped<IPositionService, PositionService>();
+            builder.Services.AddScoped<IProjectService, ProjectService>();
 
-			var app = builder.Build();
+            var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())

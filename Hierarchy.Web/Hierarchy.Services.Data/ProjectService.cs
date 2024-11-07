@@ -3,6 +3,7 @@ using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;
 using Hierarchy.Web.Models.Project;
+using Microsoft.Identity.Client;
 
 namespace Hierarchy.Services.Data
 {
@@ -30,6 +31,11 @@ namespace Hierarchy.Services.Data
         public async Task<bool> DoesProjectExistAsync(string name)
         {
             return await projectRepository.DoesProjectExistAsync(name);
+        }
+
+        public async Task<bool> DoesProjectExistByIdAsync(string id)
+        {
+            return await projectRepository.DoesProjectExistByIdAsync(id);
         }
 
         public async Task<IEnumerable<ProjectListViewModel>> GetAllProjectsAsync()

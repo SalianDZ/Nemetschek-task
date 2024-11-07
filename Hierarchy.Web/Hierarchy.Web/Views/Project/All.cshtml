@@ -1,0 +1,25 @@
+﻿@model IEnumerable<ProjectListViewModel>
+
+<h2>All Projects</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Project Name</th>
+            <th>Number of Employees</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var project in Model)
+        {
+            <tr>
+                <td>
+                    <a href="@Url.Action("Details", "Project", new { id = project.ProjectID })">
+                        @project.Name
+                    </a>
+                </td>
+                <td>@project.EmployeeCount</td>
+            </tr>
+        }
+    </tbody>
+</table>

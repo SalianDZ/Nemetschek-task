@@ -12,5 +12,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task<IEnumerable<Project>> GetAllProjectsWithEmployeesAsync();
         Task<Project> GetProjectWithEmployeesByIdAsync(Guid projectId);
         Task<bool> DoesProjectExistAsync(string name);
+        Task<bool> DoesProjectExistByIdAsync(string id);
     }
 }

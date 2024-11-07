@@ -54,10 +54,18 @@ namespace Hierarchy.Web.Controllers
 
         public async Task<IActionResult> Details(string id)
         {
+            bool isGuidCorrect = Guid.TryParse(id, out var projectId);
+
+            if (!isGuidCorrect) 
+            {
+                return NotFound("There is no such a project!");
+            }
+
             var project = await projectService.GetProjectDetailsAsync(Guid.Parse(id));
+
             if (project == null)
             {
-                return NotFound();
+                return NotFound("There is no such a project!");
             }
             return View(project);
         }

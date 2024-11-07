@@ -1,6 +1,8 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
+using System.Security.Principal;
 
 namespace Hierarchy.Data.Repositories
 {
@@ -32,6 +34,11 @@ namespace Hierarchy.Data.Repositories
         public Task<bool> DoesProjectExistAsync(string name)
         {
             return context.Projects.AnyAsync(p => p.Name == name);
+        }
+
+        public async Task<bool> DoesProjectExistByIdAsync(string id)
+        {
+            return await context.Projects.AnyAsync(p => p.Id == Guid.Parse(id));
         }
 
         public async Task<IEnumerable<Project>> GetAllProjectsAsync()
