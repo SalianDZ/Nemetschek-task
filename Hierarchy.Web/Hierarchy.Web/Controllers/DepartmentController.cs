@@ -71,9 +71,15 @@ namespace Hierarchy.Web.Controllers
         {
             try
             {
+                if (!Guid.TryParse(id, out Guid checkedId))
+                {
+                    return NotFound("There is no such a department!");
+                }
+
                 var department = await departmentService.GetDepartmentDetailsAsync(Guid.Parse(id));
 
 				// No need for additional null checks since the service always returns a valid view model
+                //We should the best way for here!!!!!!
 				return View(department);
 			}
             catch (Exception)

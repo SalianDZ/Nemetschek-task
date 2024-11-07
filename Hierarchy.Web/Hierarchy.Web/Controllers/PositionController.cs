@@ -1,11 +1,10 @@
-﻿using Hierarchy.Services.Data;
-using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Position;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Hierarchy.Web.Controllers
 {
-	public class PositionController : Controller
+    public class PositionController : Controller
 	{
 		private readonly IPositionService positionService;
         public PositionController(IPositionService positionService)
@@ -63,8 +62,20 @@ namespace Hierarchy.Web.Controllers
 		{
 			try
 			{
+				bool isGuidCorrect = Guid.TryParse(id, out var checkedId);
+
+				if (!isGuidCorrect) 
+				{
+                    
+                }
 				var position = await positionService.GetPositionDetailsAsync(Guid.Parse(id));
-				return View(position);
+
+                if (position == null)
+                {
+                    return NotFound("There is no such a position!");
+                }
+
+                return View(position);
 			}
 			catch (Exception)
 			{
