@@ -1,8 +1,7 @@
-﻿using Hierarchy.Data;
-using Hierarchy.Data.Models;
-using Hierarchy.Data.Repositories;
+﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
+using Hierarchy.Web.Models.Employee;
 using Hierarchy.Web.Models.Project;
 
 namespace Hierarchy.Services.Data
@@ -28,21 +27,41 @@ namespace Hierarchy.Services.Data
             await projectRepository.AddProjectAsync(project);
         }
 
+        public async Task<bool> DoesProjectExistAsync(string name)
+        {
+            return await projectRepository.DoesProjectExistAsync(name);
+        }
+
         public async Task<IEnumerable<ProjectListViewModel>> GetAllProjectsAsync()
         {
             var projects = await projectRepository.GetAllProjectsWithEmployeesAsync();
 
             return projects.Select(p => new ProjectListViewModel
             {
-                ProjectID = p.,
+                ProjectID = p.Id,
                 Name = p.Name,
-                EmployeeCount = p.Employees?.Count() ?? 0
+                EmployeeCount = p.EmployeeProjects?.Count() ?? 0
             }).ToList();
         }
 
-        public Task<ProjectDetailViewModel> GetProjectDetailsAsync(Guid projectId)
+        public async Task<ProjectDetailViewModel> GetProjectDetailsAsync(Guid projectId)
         {
-            throw new NotImplementedException();
+            var project = await projectRepository.GetProjectWithEmployeesByIdAsync(projectId);
+
+            if (project == null) return null;
+
+            return new ProjectDetailViewModel
+            {
+                Name = project.Name,
+                Description = project.Description,
+                StartDate = project.StartDate,
+                EndDate = project.EndDate,
+                Employees = project.EmployeeProjects?.Select(ep => new EmployeeViewModel
+                {
+                    EmployeeName = ep.Employee.Name,
+                    Position = ep.Employee.Position?.Name
+                }).ToList()
+            };
         }
     }
 }

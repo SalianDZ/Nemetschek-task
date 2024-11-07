@@ -11,5 +11,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task DeleteProjectAsync(Guid id);
         Task<IEnumerable<Project>> GetAllProjectsWithEmployeesAsync();
         Task<Project> GetProjectWithEmployeesByIdAsync(Guid projectId);
+        Task<bool> DoesProjectExistAsync(string name);
     }
 }

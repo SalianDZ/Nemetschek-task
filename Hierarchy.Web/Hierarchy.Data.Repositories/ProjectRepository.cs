@@ -29,6 +29,11 @@ namespace Hierarchy.Data.Repositories
             }
         }
 
+        public Task<bool> DoesProjectExistAsync(string name)
+        {
+            return context.Projects.AnyAsync(p => p.Name == name);
+        }
+
         public async Task<IEnumerable<Project>> GetAllProjectsAsync()
         {
             return await context.Projects.ToListAsync();

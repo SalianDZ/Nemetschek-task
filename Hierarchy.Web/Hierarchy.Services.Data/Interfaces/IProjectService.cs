@@ -7,5 +7,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task<IEnumerable<ProjectListViewModel>> GetAllProjectsAsync();
         Task<ProjectDetailViewModel> GetProjectDetailsAsync(Guid projectId);
         Task AddProjectAsync(ProjectFormViewModel projectViewModel);
+        Task<bool> DoesProjectExistAsync(string name);
     }
 }
