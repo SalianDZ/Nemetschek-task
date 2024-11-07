@@ -50,6 +50,12 @@ namespace Hierarchy.Web.Controllers
                 return View(model);
             }
 
+            if (await departmentService.DoesDepartmentExistAsync(model.Name))
+            {
+                //There should be a better way for error handling!
+                return RedirectToAction("All", "Position");
+            }
+
             try
             {
                 await departmentService.AddDepartmentAsync(model);

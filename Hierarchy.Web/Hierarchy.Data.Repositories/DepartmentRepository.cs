@@ -59,5 +59,10 @@ namespace Hierarchy.Data.Repositories
 				.ThenInclude(e => e.Position) // Optionally load Position details for each Employee, if available
 				.FirstOrDefaultAsync(d => d.Id == departmentId);
 		}
-	}
+
+        public Task<bool> DoesDepartmentExistAsync(string name)
+        {
+            return context.Departments.AnyAsync(d => d.Name == name);
+        }
+    }
 }

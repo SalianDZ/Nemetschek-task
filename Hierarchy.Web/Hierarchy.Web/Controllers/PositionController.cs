@@ -41,11 +41,11 @@ namespace Hierarchy.Web.Controllers
 				return View(model);
 			}
 
-			//There should be a check for adding the same positions
 
 			if (await positionService.DoesPositionExistAsync(model.Name))
 			{
-                return View("Error");
+				//There should be a better way for error handling!
+                return RedirectToAction("All", "Position");
             }
 
 			try

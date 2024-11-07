@@ -23,6 +23,11 @@ namespace Hierarchy.Services.Data
             await departmentRepository.AddDepartmentAsync(department);
         }
 
+        public async Task<bool> DoesDepartmentExistAsync(string name)
+        {
+            return await departmentRepository.DoesDepartmentExistAsync(name);
+        }
+
         public async Task<IEnumerable<DepartmentListViewModel>> GetAllDepartmentsAsync()
         {
             var departments = await departmentRepository.GetAllDepartmentsWithEmployeesAsync();
