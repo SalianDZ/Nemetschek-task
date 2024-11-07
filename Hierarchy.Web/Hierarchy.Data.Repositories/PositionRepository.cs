@@ -28,6 +28,11 @@ namespace Hierarchy.Data.Repositories
             }
         }
 
+        public Task<bool> DoesPositionExistAsync(string name)
+        {
+            return context.Positions.AnyAsync(p => p.Name == name);
+        }
+
         public async Task<IEnumerable<Position>> GetAllPositionsAsync()
         {
             return await context.Positions.ToListAsync();

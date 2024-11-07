@@ -11,5 +11,7 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task DeletePositionAsync(Guid id);
 		Task<IEnumerable<Position>> GetAllPositionsWithEmployeesAsync();
 		Task<Position> GetPositionWithEmployeesByIdAsync(Guid positionId);
+
+        Task<bool> DoesPositionExistAsync(string name);
 	}
 }

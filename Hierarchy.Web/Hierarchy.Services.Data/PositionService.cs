@@ -1,13 +1,12 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
-using Hierarchy.Web.Models.Department;
 using Hierarchy.Web.Models.Employee;
 using Hierarchy.Web.Models.Position;
 
 namespace Hierarchy.Services.Data
 {
-	public class PositionService : IPositionService
+    public class PositionService : IPositionService
 	{
 		private readonly IPositionRepository positionRepository;
 
@@ -28,7 +27,12 @@ namespace Hierarchy.Services.Data
 			await positionRepository.AddPositionAsync(position);
 		}
 
-		public async Task<IEnumerable<PositionListViewModel>> GetAllPositionsAsync()
+        public async Task<bool> DoesPositionExistAsync(string positionName)
+        {
+            return await positionRepository.DoesPositionExistAsync(positionName);
+        }
+
+        public async Task<IEnumerable<PositionListViewModel>> GetAllPositionsAsync()
 		{
 			var positions = await positionRepository.GetAllPositionsWithEmployeesAsync();
 

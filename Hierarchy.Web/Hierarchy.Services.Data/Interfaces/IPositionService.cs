@@ -7,5 +7,7 @@ namespace Hierarchy.Services.Data.Interfaces
 		Task<IEnumerable<PositionListViewModel>> GetAllPositionsAsync();
 		Task<PositionDetailViewModel> GetPositionDetailsAsync(Guid positionId);
 		Task AddPositionAsync(PositionFormViewModel positionViewModel);
+
+		Task<bool> DoesPositionExistAsync(string positionName);
 	}
 }
