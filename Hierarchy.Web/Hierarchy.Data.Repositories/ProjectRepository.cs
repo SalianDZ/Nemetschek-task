@@ -34,9 +34,25 @@ namespace Hierarchy.Data.Repositories
             return await context.Projects.ToListAsync();
         }
 
+        public async Task<IEnumerable<Project>> GetAllProjectsWithEmployeesAsync()
+        {
+            return await context.Projects
+                .Include(p => p.EmployeeProjects)
+                .ThenInclude(ep => ep.Employee) // Load employees through the EmployeeProjects relationship
+                .ToListAsync();
+        }
+
         public async Task<Project> GetProjectByIdAsync(Guid id)
         {
             return await context.Projects.FindAsync(id);
+        }
+
+        public async Task<Project> GetProjectWithEmployeesByIdAsync(Guid projectId)
+        {
+            return await context.Projects
+                .Include(p => p.EmployeeProjects)
+                .ThenInclude(ep => ep.Employee)
+                .FirstOrDefaultAsync(p => p.Id == projectId);
         }
 
         public async Task UpdateProjectAsync(Project project)

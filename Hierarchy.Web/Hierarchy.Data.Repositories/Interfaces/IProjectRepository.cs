@@ -9,5 +9,7 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task AddProjectAsync(Project project);
         Task UpdateProjectAsync(Project project);
         Task DeleteProjectAsync(Guid id);
+        Task<IEnumerable<Project>> GetAllProjectsWithEmployeesAsync();
+        Task<Project> GetProjectWithEmployeesByIdAsync(Guid projectId);
     }
 }
