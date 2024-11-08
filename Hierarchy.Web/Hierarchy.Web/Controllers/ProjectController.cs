@@ -1,5 +1,4 @@
-﻿using Hierarchy.Services.Data;
-using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Project;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,8 +35,7 @@ namespace Hierarchy.Web.Controllers
 
             if (await projectService.DoesProjectExistAsync(model.Name))
             {
-                //We have to implement a better error handling method!
-                return RedirectToAction("All", "Project");
+                return NotFound("There is already a project with the same name!");
             }
 
             try
@@ -47,8 +45,7 @@ namespace Hierarchy.Web.Controllers
             }
             catch (Exception)
             {
-                //We have to implement a better error handling method!
-                return RedirectToAction("All", "Project");
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
 
