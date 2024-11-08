@@ -22,6 +22,7 @@ namespace Hierarchy.Web.Models.Employee
         public int Gender { get; set; }
 
         [Required]
+        [Range(ExperienceYearsMinValue, ExperienceYearsMaxValue)]
         public int ExperienceYears { get; set; }
 
         [Required]
@@ -36,10 +37,14 @@ namespace Hierarchy.Web.Models.Employee
 
         public IEnumerable<DepartmentSelectViewModel> Departments { get; set; }
 
-        [Required]
+
         [Display(Name = "Supervisor")]
         public Guid? SupervisorId { get; set; }
 
         public IEnumerable<SupervisorSelectViewModel> Supervisors { get; set; }
+
+        [Required]
+        [Display(Name = "Is Supervisor")]
+        public bool IsSupervisor { get; set; }
     }
 }

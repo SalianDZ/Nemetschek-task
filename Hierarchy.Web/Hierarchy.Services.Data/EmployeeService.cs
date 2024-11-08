@@ -24,10 +24,15 @@ namespace Hierarchy.Services.Data
                 ExperienceYears = employeeForm.ExperienceYears,
                 PositionID = employeeForm.PositionId,
                 DepartmentID = employeeForm.DepartmentId,
-                SupervisorID = employeeForm.SupervisorId
+                SupervisorID = employeeForm.IsSupervisor ? null : employeeForm.SupervisorId
             };
 
             await employeeRepository.AddEmployeeAsync(employee);
+        }
+
+        public async Task<bool> DoesEmployeeExistByNameAsync(string name)
+        {
+            return await employeeRepository.DoesEmployeeExistByNameAsync(name);
         }
 
         public async Task<IEnumerable<EmployeeListViewModel>> GetAllEmployeesAsync()

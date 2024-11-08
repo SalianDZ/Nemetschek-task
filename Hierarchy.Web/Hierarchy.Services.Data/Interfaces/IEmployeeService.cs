@@ -10,5 +10,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task<IEnumerable<SupervisorSelectViewModel>> GetAllSupervisorsForSelectAsync();
 
         Task<IEnumerable<GenderOptions>> GetGenderOptions();
+        Task<bool> DoesEmployeeExistByNameAsync(string name);
     }
 }

@@ -29,6 +29,11 @@ namespace Hierarchy.Data.Repositories
             }
         }
 
+        public async Task<bool> DoesEmployeeExistByNameAsync(string name)
+        {
+            return await context.Employees.AnyAsync(x => x.Name == name);
+        }
+
         public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
             return await context.Employees
@@ -40,7 +45,7 @@ namespace Hierarchy.Data.Repositories
 
         public async Task<IEnumerable<Employee>> GetAllSupervisorsAsync()
         {
-            return await context.Employees.Include(e => e.Supervisor).Where(e => e.SupervisorID != null).ToListAsync();
+            return await context.Employees.Include(e => e.Supervisor).Where(e => e.SupervisorID == null).ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)

@@ -53,11 +53,16 @@
                 <span asp-validation-for="DepartmentId" class="small text-danger"></span>
             </div>
 
-            <!-- Supervisor Dropdown -->
-            <div class="form-group">
+            <!-- Is Supervisor Checkbox -->
+            <div class="form-group form-check">
+                <input asp-for="IsSupervisor" type="checkbox" class="form-check-input" id="IsSupervisorCheckbox" />
+                <label asp-for="IsSupervisor" class="form-check-label">Is Supervisor</label>
+            </div>
+
+            <!-- Conditional Supervisor Dropdown -->
+            <div class="form-group" id="SupervisorDropdown" style="display: none;">
                 <label asp-for="SupervisorId"></label>
                 <select asp-for="SupervisorId" class="form-control">
-                    <option value="">None</option> <!-- Option for no supervisor -->
                     @foreach (var supervisor in Model.Supervisors)
                     {
                         <option value="@supervisor.Id">@supervisor.Name</option>
@@ -73,3 +78,28 @@
         </form>
     </div>
 </div>
+
+@section Scripts {
+    <script>
+        // JavaScript to toggle the Supervisor dropdown based on IsSupervisor checkbox
+        document.addEventListener("DOMContentLoaded", function () {
+            const isSupervisorCheckbox = document.getElementById("IsSupervisorCheckbox");
+            const supervisorDropdown = document.getElementById("SupervisorDropdown");
+
+            // Function to toggle dropdown visibility
+            function toggleSupervisorDropdown() {
+                if (isSupervisorCheckbox.checked) {
+                    supervisorDropdown.style.display = "none";
+                } else {
+                    supervisorDropdown.style.display = "block";
+                }
+            }
+
+            // Event listener for checkbox change
+            isSupervisorCheckbox.addEventListener("change", toggleSupervisorDropdown);
+
+            // Initial state check on page load
+            toggleSupervisorDropdown();
+        });
+    </script>
+}
