@@ -8,8 +8,9 @@ namespace Hierarchy.Services.Data.Interfaces
         //Task<EmployeeDetailViewModel> GetEmployeeDetailsAsync(Guid employeeId);
         Task AddEmployeeAsync(EmployeeFormViewModel employeeForm);
         Task<IEnumerable<SupervisorSelectViewModel>> GetAllSupervisorsForSelectAsync();
-
         Task<IEnumerable<GenderOptions>> GetGenderOptions();
         Task<bool> DoesEmployeeExistByNameAsync(string name);
+        Task DeleteEmployeeAsync(Guid employeeId);
+        Task<EmployeeDetailViewModel> GetEmployeeDetailsAsync(Guid employeeId);
     }
 }

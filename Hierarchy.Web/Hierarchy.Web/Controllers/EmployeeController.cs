@@ -1,4 +1,5 @@
-﻿using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data;
+using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;
 using Microsoft.AspNetCore.Mvc;
 
@@ -78,6 +79,26 @@ namespace Hierarchy.Web.Controllers
             catch (Exception)
             {
                 return NotFound("An error occured while saving the data! Try again!");
+            }
+        }
+
+        public async Task<IActionResult> Details(string id)
+        {
+            try
+            {
+                if (!Guid.TryParse(id, out Guid checkedId))
+                {
+                    return NotFound("There is no such a department!");
+                }
+
+                var department = await employeeService.GetEmployeeDetailsAsync(checkedId);
+
+                //We should the best way for here!!!!!!
+                return View(department);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
     }

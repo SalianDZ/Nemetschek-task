@@ -1,0 +1,55 @@
+﻿@model EmployeeDetailViewModel
+
+<h2>Employee Details</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <h4>@Model.Name</h4>
+        <p><strong>Position:</strong> @Model.Position</p>
+        <p><strong>Department:</strong> @Model.Department</p>
+        <p><strong>Supervisor:</strong> @(string.IsNullOrEmpty(Model.Supervisor) ? "None" : Model.Supervisor)</p>
+        <p><strong>Experience:</strong> @Model.ExperienceYears years</p>
+        <p><strong>Gender:</strong> @Model.Gender</p>
+    </div>
+</div>
+
+<h4>Subordinates</h4>
+@if (Model.Subordinates != null && Model.Subordinates.Any())
+{
+    <ul class="list-group mb-4">
+        @foreach (var subordinate in Model.Subordinates)
+        {
+            <li class="list-group-item">@subordinate.EmployeeName - @subordinate.Position</li>
+        }
+    </ul>
+}
+else
+{
+    <p>This employee has no subordinates.</p>
+}
+
+<h4>Projects</h4>
+@if (Model.Projects != null && Model.Projects.Any())
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var project in Model.Projects)
+            {
+                <tr>
+                    <td>@project.Name</td>
+                    <td>@project.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>This employee is not assigned to any projects.</p>
+}

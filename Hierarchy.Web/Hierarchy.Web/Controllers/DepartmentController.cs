@@ -1,4 +1,5 @@
-﻿using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data;
+using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Department;
 using Microsoft.AspNetCore.Mvc;
 
@@ -51,8 +52,7 @@ namespace Hierarchy.Web.Controllers
 
             if (await departmentService.DoesDepartmentExistAsync(model.Name))
             {
-                //There should be a better way for error handling!
-                return RedirectToAction("All", "Position");
+                return NotFound("There is already a department with the same name!");
             }
 
             try
@@ -85,6 +85,32 @@ namespace Hierarchy.Web.Controllers
             {
                 return NotFound("An error occured during the process of connecting to the database!");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            var department = await departmentService.GetDepartmentDetailsAsync(correctId);
+
+            if (department == null)
+            {
+                return NotFound();
+            }
+
+            return View(department);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        {
+            await departmentService.DeleteDepartmentAsync(id);
+            return RedirectToAction("All", "Department");
         }
     }
 }

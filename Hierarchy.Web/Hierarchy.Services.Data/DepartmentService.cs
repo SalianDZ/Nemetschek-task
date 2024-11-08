@@ -1,4 +1,5 @@
 ﻿using Hierarchy.Data.Models;
+using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Department;
@@ -21,6 +22,11 @@ namespace Hierarchy.Services.Data
             department.Name = departmentViewModel.Name;
             department.Description = departmentViewModel.Description;
             await departmentRepository.AddDepartmentAsync(department);
+        }
+
+        public async Task DeleteDepartmentAsync(Guid departmentId)
+        {
+            await departmentRepository.DeleteDepartmentAsync(departmentId);
         }
 
         public async Task<bool> DoesDepartmentExistAsync(string name)
