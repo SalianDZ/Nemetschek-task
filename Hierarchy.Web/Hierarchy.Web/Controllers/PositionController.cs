@@ -27,9 +27,8 @@ namespace Hierarchy.Web.Controllers
 			}
 			catch (Exception)
 			{
-
-				return View("Error");
-			}
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
 		}
 
 		[HttpPost]
@@ -43,8 +42,8 @@ namespace Hierarchy.Web.Controllers
 
 			if (await positionService.DoesPositionExistAsync(model.Name))
 			{
-				//There should be a better way for error handling!
-                return RedirectToAction("All", "Position");
+                //There should be a better way for error handling!
+                return NotFound("There is already a position with the same name!");
             }
 
 			try
@@ -54,8 +53,8 @@ namespace Hierarchy.Web.Controllers
 			}
 			catch (Exception)
 			{
-				return View("Error");
-			}
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
 		}
 
 		public async Task<IActionResult> Details(string id)
@@ -66,8 +65,9 @@ namespace Hierarchy.Web.Controllers
 
 				if (!isGuidCorrect) 
 				{
-                    
+					return NotFound("Please enter a valid Guid!");
                 }
+
 				var position = await positionService.GetPositionDetailsAsync(Guid.Parse(id));
 
                 if (position == null)
@@ -79,7 +79,7 @@ namespace Hierarchy.Web.Controllers
 			}
 			catch (Exception)
 			{
-				return View("Error");
+				return NotFound("An error occured during the process of connecting to the database!");
 			}
 		}
 	}
