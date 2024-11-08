@@ -23,7 +23,7 @@ namespace Hierarchy.Web.Controllers
 			}
             catch (Exception)
             {
-				return View("Error");
+				return NotFound("An error occured during the process of connecting to the database!");
 			}
         }
 
@@ -37,7 +37,7 @@ namespace Hierarchy.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Error");
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
 
@@ -62,7 +62,7 @@ namespace Hierarchy.Web.Controllers
             }
             catch (Exception)
             {
-                return View("Error");
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
 
@@ -83,8 +83,8 @@ namespace Hierarchy.Web.Controllers
 			}
             catch (Exception)
             {
-				return View("Error");
-			}
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
         }
     }
 }
