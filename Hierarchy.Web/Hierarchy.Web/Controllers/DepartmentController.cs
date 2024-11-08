@@ -1,5 +1,4 @@
-﻿using Hierarchy.Services.Data;
-using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Department;
 using Microsoft.AspNetCore.Mvc;
 

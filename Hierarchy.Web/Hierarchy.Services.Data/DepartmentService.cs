@@ -41,7 +41,17 @@ namespace Hierarchy.Services.Data
             }).ToList();
         }
 
-		public async Task<DepartmentDetailViewModel> GetDepartmentDetailsAsync(Guid departmentId)
+        public async Task<IEnumerable<DepartmentSelectViewModel>> GetAllDepartmentsForSelectAsync()
+        {
+            IEnumerable<Department> allDepartments = await departmentRepository.GetAllDepartmentsAsync();
+            return allDepartments.Select(d => new DepartmentSelectViewModel 
+            {
+                Id= d.Id,
+                Name = d.Name
+            }).ToList();
+        }
+
+        public async Task<DepartmentDetailViewModel> GetDepartmentDetailsAsync(Guid departmentId)
 		{
 			var department = await departmentRepository.GetDepartmentWithEmployeesByIdAsync(departmentId);
 

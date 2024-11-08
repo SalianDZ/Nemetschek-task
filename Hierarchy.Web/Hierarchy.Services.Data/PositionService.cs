@@ -44,7 +44,17 @@ namespace Hierarchy.Services.Data
 			}).ToList();
 		}
 
-		public async Task<PositionDetailViewModel> GetPositionDetailsAsync(Guid positionId)
+        public async Task<IEnumerable<PositionSelectViewModel>> GetAllPositionsForSelectAsync()
+        {
+            IEnumerable<Position> allPositions = await positionRepository.GetAllPositionsAsync();
+			return allPositions.Select(p => new PositionSelectViewModel
+			{
+				Id = p.Id,
+				Name = p.Name
+			}).ToList();
+        }
+
+        public async Task<PositionDetailViewModel> GetPositionDetailsAsync(Guid positionId)
 		{
 			var position = await positionRepository.GetPositionWithEmployeesByIdAsync(positionId);
 

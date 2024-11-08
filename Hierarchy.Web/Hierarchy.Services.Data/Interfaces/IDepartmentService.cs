@@ -8,5 +8,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task AddDepartmentAsync(DepartmentFormViewModel departmentViewModel);
 		Task<DepartmentDetailViewModel> GetDepartmentDetailsAsync(Guid departmentId);
         Task<bool> DoesDepartmentExistAsync(string name);
+        Task<IEnumerable<DepartmentSelectViewModel>> GetAllDepartmentsForSelectAsync();
 	}
 }

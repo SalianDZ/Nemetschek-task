@@ -32,9 +32,15 @@ namespace Hierarchy.Data.Repositories
         public async Task<IEnumerable<Employee>> GetAllEmployeesAsync()
         {
             return await context.Employees
-                .Include(e => e.Department)
                 .Include(e => e.Position)
+                .Include(e => e.Department)
+                .Include(e => e.Supervisor)
                 .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Employee>> GetAllSupervisorsAsync()
+        {
+            return await context.Employees.Include(e => e.Supervisor).Where(e => e.SupervisorID != null).ToListAsync();
         }
 
         public async Task<Employee> GetEmployeeByIdAsync(Guid id)
@@ -43,6 +49,18 @@ namespace Hierarchy.Data.Repositories
                 .Include(e => e.Department)   // Include Department for navigation property
                 .Include(e => e.Position)     // Include Position for navigation property
                 .FirstOrDefaultAsync(e => e.Id == id);
+        }
+
+        public async Task<Employee> GetEmployeeWithDetailsByIdAsync(Guid employeeId)
+        {
+            return await context.Employees
+                .Include(e => e.Position)
+                .Include(e => e.Department)
+                .Include(e => e.Supervisor)
+                .Include(e => e.Subordinates)
+                .Include(e => e.EmployeeProjects)
+                    .ThenInclude(ep => ep.Project)
+                .FirstOrDefaultAsync(e => e.Id == employeeId);
         }
 
         public async Task UpdateEmployeeAsync(Employee employee)

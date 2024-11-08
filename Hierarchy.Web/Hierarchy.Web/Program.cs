@@ -22,10 +22,12 @@ namespace Hierarchy.Web
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
 			builder.Services.AddScoped<IPositionRepository, PositionRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
 
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 			builder.Services.AddScoped<IPositionService, PositionService>();
             builder.Services.AddScoped<IProjectService, ProjectService>();
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 
             var app = builder.Build();
 

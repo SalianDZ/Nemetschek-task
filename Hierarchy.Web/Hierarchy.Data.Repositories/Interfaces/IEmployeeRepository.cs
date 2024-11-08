@@ -6,6 +6,8 @@ namespace Hierarchy.Data.Repositories.Interfaces
     {
         Task<Employee> GetEmployeeByIdAsync(Guid id);
         Task<IEnumerable<Employee>> GetAllEmployeesAsync();
+        Task<IEnumerable<Employee>> GetAllSupervisorsAsync();
+        Task<Employee> GetEmployeeWithDetailsByIdAsync(Guid employeeId);
         Task AddEmployeeAsync(Employee employee);
         Task UpdateEmployeeAsync(Employee employee);
         Task DeleteEmployeeAsync(Guid id);
