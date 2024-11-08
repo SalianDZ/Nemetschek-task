@@ -19,19 +19,33 @@ namespace Hierarchy.Web.Controllers
         }
         public async Task<IActionResult> All()
         {
-            var employees = await employeeService.GetAllEmployeesAsync();
-            return View(employees);
+            try
+            {
+                var employees = await employeeService.GetAllEmployeesAsync();
+                return View(employees);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
         }
 
         [HttpGet]
         public async Task<IActionResult> Add()
         {
-            EmployeeFormViewModel model = new();
-            ViewBag.GenderOptions = await employeeService.GetGenderOptions();
-            model.Departments = await departmentService.GetAllDepartmentsForSelectAsync();
-            model.Positions = await positionService.GetAllPositionsForSelectAsync();
-            model.Supervisors = await employeeService.GetAllSupervisorsForSelectAsync();
-            return View(model);
+            try
+            {
+                EmployeeFormViewModel model = new();
+                ViewBag.GenderOptions = await employeeService.GetGenderOptions();
+                model.Departments = await departmentService.GetAllDepartmentsForSelectAsync();
+                model.Positions = await positionService.GetAllPositionsForSelectAsync();
+                model.Supervisors = await employeeService.GetAllSupervisorsForSelectAsync();
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
         }
 
         [HttpPost]
