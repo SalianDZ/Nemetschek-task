@@ -1,7 +1,8 @@
 ﻿using Hierarchy.Data.Models;
+using Hierarchy.Data.Models.Enums;
 using Hierarchy.Data.Repositories.Interfaces;
+using Hierarchy.Web.Models.Employee;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.CompilerServices;
 
 namespace Hierarchy.Data.Repositories
 {
@@ -23,6 +24,7 @@ namespace Hierarchy.Data.Repositories
         public async Task DeleteEmployeeAsync(Guid id)
         {
             var employee = await GetEmployeeByIdAsync(id);
+
             if (employee != null)
             {
                 context.Employees.Remove(employee);
@@ -79,9 +81,15 @@ namespace Hierarchy.Data.Repositories
             return await context.Employees.AnyAsync(e => e.PositionID == positionId);
         }
 
-        public async Task UpdateEmployeeAsync(Employee employee)
+        public async Task UpdateEmployeeAsync(EmployeeFormViewModel model, Guid id)
         {
-            context.Employees.Update(employee);
+            Employee employee = await GetEmployeeByIdAsync(id);
+            employee.Name = model.Name;
+            employee.Gender = (Gender) model.Gender;
+            employee.ExperienceYears = model.ExperienceYears;
+            employee.SupervisorID = model.IsSupervisor ? null : model.SupervisorId;
+            employee.DepartmentID = model.DepartmentId;
+            employee.PositionID = model.PositionId;
             await context.SaveChangesAsync();
         }
     }

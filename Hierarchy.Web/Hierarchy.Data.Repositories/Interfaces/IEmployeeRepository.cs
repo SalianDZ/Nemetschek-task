@@ -1,4 +1,5 @@
 ﻿using Hierarchy.Data.Models;
+using Hierarchy.Web.Models.Employee;
 
 namespace Hierarchy.Data.Repositories.Interfaces
 {
@@ -9,7 +10,7 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task<IEnumerable<Employee>> GetAllSupervisorsAsync();
         Task<Employee> GetEmployeeWithDetailsByIdAsync(Guid employeeId);
         Task AddEmployeeAsync(Employee employee);
-        Task UpdateEmployeeAsync(Employee employee);
+        Task UpdateEmployeeAsync(EmployeeFormViewModel model, Guid id);
         Task DeleteEmployeeAsync(Guid id);
         Task<bool> DoesEmployeeExistByNameAsync(string name);
         Task<bool> HasEmployeesInDepartmentAsync(Guid departmentId);

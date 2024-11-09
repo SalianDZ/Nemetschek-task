@@ -102,5 +102,87 @@ namespace Hierarchy.Web.Controllers
                 return NotFound("An error occured during the process of connecting to the database!");
             }
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            var employee = await employeeService.GetEmployeeDetailsAsync(correctId);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return View(employee);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                await employeeService.DeleteEmployeeAsync(correctId);
+                return RedirectToAction("All", "Employee");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Delete", "Employee");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                ViewBag.GenderOptions = await employeeService.GetGenderOptions();
+                EmployeeFormViewModel model = await employeeService.GetEmployeeForEditAsync(correctId);
+                model.Departments = await departmentService.GetAllDepartmentsForSelectAsync();
+                model.Positions = await positionService.GetAllPositionsForSelectAsync();
+                model.Supervisors = await employeeService.GetAllSupervisorsForSelectAsync();
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(EmployeeFormViewModel model, string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                await employeeService.UpdateEmployeeAsync(model, correctId);
+                return RedirectToAction("All", "Employee");
+            }
+
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
+        }
     }
 }

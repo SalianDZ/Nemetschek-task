@@ -1,0 +1,105 @@
+﻿@model EmployeeFormViewModel
+
+<div class="row">
+    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
+        <form method="post">
+            <!-- Name Field -->
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Enter full name..." />
+                <span asp-validation-for="Name" class="small text-danger"></span>
+            </div>
+
+            <!-- Gender Dropdown -->
+            <div class="form-group">
+                <label asp-for="Gender"></label>
+                <select asp-for="Gender" class="form-control">
+                    @foreach (var option in ViewBag.GenderOptions)
+                    {
+                        <option value="@option.Value">@option.Text</option>
+                    }
+                </select>
+                <span asp-validation-for="Gender" class="small text-danger"></span>
+            </div>
+
+            <!-- Experience Years Field -->
+            <div class="form-group">
+                <label asp-for="ExperienceYears"></label>
+                <input asp-for="ExperienceYears" type="number" class="form-control" placeholder="Years of experience..." />
+                <span asp-validation-for="ExperienceYears" class="small text-danger"></span>
+            </div>
+
+            <!-- Position Dropdown -->
+            <div class="form-group">
+                <label asp-for="PositionId"></label>
+                <select asp-for="PositionId" class="form-control">
+                    @foreach (var position in Model.Positions)
+                    {
+                        <option value="@position.Id">@position.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="PositionId" class="small text-danger"></span>
+            </div>
+
+            <!-- Department Dropdown -->
+            <div class="form-group">
+                <label asp-for="DepartmentId"></label>
+                <select asp-for="DepartmentId" class="form-control">
+                    @foreach (var department in Model.Departments)
+                    {
+                        <option value="@department.Id">@department.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="DepartmentId" class="small text-danger"></span>
+            </div>
+
+            <!-- Is Supervisor Checkbox -->
+            <div class="form-group form-check">
+                <input asp-for="IsSupervisor" type="checkbox" class="form-check-input" id="IsSupervisorCheckbox" />
+                <label asp-for="IsSupervisor" class="form-check-label">Is Supervisor</label>
+            </div>
+
+            <!-- Conditional Supervisor Dropdown -->
+            <div class="form-group" id="SupervisorDropdown" style="display: none;">
+                <label asp-for="SupervisorId"></label>
+                <select asp-for="SupervisorId" class="form-control">
+                    @foreach (var supervisor in Model.Supervisors)
+                    {
+                        <option value="@supervisor.Id">@supervisor.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="SupervisorId" class="small text-danger"></span>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="text-center">
+                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        // JavaScript to toggle the Supervisor dropdown based on IsSupervisor checkbox
+        document.addEventListener("DOMContentLoaded", function () {
+            const isSupervisorCheckbox = document.getElementById("IsSupervisorCheckbox");
+            const supervisorDropdown = document.getElementById("SupervisorDropdown");
+
+            // Function to toggle dropdown visibility
+            function toggleSupervisorDropdown() {
+                if (isSupervisorCheckbox.checked) {
+                    supervisorDropdown.style.display = "none";
+                } else {
+                    supervisorDropdown.style.display = "block";
+                }
+            }
+
+            // Event listener for checkbox change
+            isSupervisorCheckbox.addEventListener("change", toggleSupervisorDropdown);
+
+            // Initial state check on page load
+            toggleSupervisorDropdown();
+        });
+    </script>
+}

@@ -98,6 +98,17 @@ namespace Hierarchy.Services.Data
             };
         }
 
+        public async Task<EmployeeFormViewModel> GetEmployeeForEditAsync(Guid id)
+        {
+            Employee employee = await employeeRepository.GetEmployeeByIdAsync(id);
+            return new EmployeeFormViewModel
+            {
+                Name = employee.Name,
+                Gender = (int) employee.Gender,
+                ExperienceYears = employee.ExperienceYears
+            };
+        }
+
         public async Task<IEnumerable<GenderOptions>> GetGenderOptions()
         {
                 return new List<GenderOptions>
@@ -107,6 +118,11 @@ namespace Hierarchy.Services.Data
                 new GenderOptions { Value = 3, Text = "NonBinary" },
                 new GenderOptions { Value = 4, Text = "Other" }
             };
+        }
+
+        public async Task UpdateEmployeeAsync(EmployeeFormViewModel model, Guid id)
+        {
+            await employeeRepository.UpdateEmployeeAsync(model, id);
         }
     }
 }

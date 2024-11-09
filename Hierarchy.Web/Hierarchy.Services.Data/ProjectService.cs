@@ -1,5 +1,4 @@
 ﻿using Hierarchy.Data.Models;
-using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;

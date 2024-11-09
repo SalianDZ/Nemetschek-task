@@ -1,0 +1,24 @@
+﻿@model EmployeeDetailViewModel
+
+<h2>Delete Employee</h2>
+
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+<div class="alert alert-warning">
+    <h4>Are you sure you want to delete this employee?</h4>
+    <p>This action cannot be undone.</p>
+    <p><strong>Employee Name:</strong> @Model.Name</p>
+    <p><strong>Position:</strong> @Model.Position</p>
+    <p><strong>Department:</strong> @Model.Department</p>
+    <p><strong>Supervisor:</strong> @(string.IsNullOrEmpty(Model.Supervisor) ? "None" : Model.Supervisor)</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>
