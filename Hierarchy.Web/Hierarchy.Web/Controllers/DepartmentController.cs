@@ -107,10 +107,23 @@ namespace Hierarchy.Web.Controllers
 
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(Guid id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
-            await departmentService.DeleteDepartmentAsync(id);
-            return RedirectToAction("All", "Department");
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                await departmentService.DeleteDepartmentAsync(correctId);
+                return RedirectToAction("All", "Department");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Delete", "Department");
+            }
         }
     }
 }

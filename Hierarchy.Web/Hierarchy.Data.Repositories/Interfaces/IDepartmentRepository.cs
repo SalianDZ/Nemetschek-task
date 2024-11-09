@@ -12,5 +12,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task<IEnumerable<Department>> GetAllDepartmentsWithEmployeesAsync();
         Task<Department> GetDepartmentWithEmployeesByIdAsync(Guid id);
         Task<bool> DoesDepartmentExistAsync(string name);
+        Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid id);
 	}
 }

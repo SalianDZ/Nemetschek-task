@@ -12,5 +12,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task UpdateEmployeeAsync(Employee employee);
         Task DeleteEmployeeAsync(Guid id);
         Task<bool> DoesEmployeeExistByNameAsync(string name);
+        Task<bool> HasEmployeesInDepartmentAsync(Guid departmentId);
     }
 }

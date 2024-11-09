@@ -12,5 +12,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task<bool> DoesEmployeeExistByNameAsync(string name);
         Task DeleteEmployeeAsync(Guid employeeId);
         Task<EmployeeDetailViewModel> GetEmployeeDetailsAsync(Guid employeeId);
+        Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid departmentId);
     }
 }

@@ -36,6 +36,11 @@ namespace Hierarchy.Services.Data
             await employeeRepository.DeleteEmployeeAsync(employeeId);
         }
 
+        public async Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid departmentId)
+        {
+            return await employeeRepository.HasEmployeesInDepartmentAsync(departmentId);  
+        }
+
         public async Task<bool> DoesEmployeeExistByNameAsync(string name)
         {
             return await employeeRepository.DoesEmployeeExistByNameAsync(name);

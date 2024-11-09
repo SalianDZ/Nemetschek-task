@@ -68,6 +68,11 @@ namespace Hierarchy.Data.Repositories
                 .FirstOrDefaultAsync(e => e.Id == employeeId);
         }
 
+        public async Task<bool> HasEmployeesInDepartmentAsync(Guid departmentId)
+        {
+            return await context.Employees.AnyAsync(e => e.DepartmentID == departmentId);
+        }
+
         public async Task UpdateEmployeeAsync(Employee employee)
         {
             context.Employees.Update(employee);

@@ -64,5 +64,11 @@ namespace Hierarchy.Data.Repositories
         {
             return context.Departments.AnyAsync(d => d.Name == name);
         }
+
+        public async Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid id)
+        {
+            Department department = await context.Departments.FirstAsync(d => d.Id == id);
+            return department.Employees.Any();
+        }
     }
 }

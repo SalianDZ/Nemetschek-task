@@ -7,13 +7,15 @@ using Hierarchy.Web.Models.Employee;
 
 namespace Hierarchy.Services.Data
 {
-	public class DepartmentService : IDepartmentService
+    public class DepartmentService : IDepartmentService
     {
         private readonly IDepartmentRepository departmentRepository;
+        private readonly IEmployeeRepository employeeRepository;
 
-        public DepartmentService(IDepartmentRepository departmentRepository)
+        public DepartmentService(IDepartmentRepository departmentRepository, IEmployeeRepository employeeRepository)
         {
                 this.departmentRepository = departmentRepository;
+                this.employeeRepository = employeeRepository;
         }
 
         public async Task AddDepartmentAsync(DepartmentFormViewModel departmentViewModel)
@@ -26,12 +28,24 @@ namespace Hierarchy.Services.Data
 
         public async Task DeleteDepartmentAsync(Guid departmentId)
         {
+            var hasEmployees = await employeeRepository.HasEmployeesInDepartmentAsync(departmentId);
+
+            if (hasEmployees)
+            {
+                throw new InvalidOperationException("Cannot delete department with associated employees.");
+            }
+
             await departmentRepository.DeleteDepartmentAsync(departmentId);
         }
 
         public async Task<bool> DoesDepartmentExistAsync(string name)
         {
             return await departmentRepository.DoesDepartmentExistAsync(name);
+        }
+
+        public async Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid id)
+        {
+            return await departmentRepository.DoesDepartmentHaveAnyEmployeesAsync(id);
         }
 
         public async Task<IEnumerable<DepartmentListViewModel>> GetAllDepartmentsAsync()
