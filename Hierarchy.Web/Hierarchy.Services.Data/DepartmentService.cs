@@ -1,5 +1,4 @@
 ﻿using Hierarchy.Data.Models;
-using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Department;
@@ -98,5 +97,16 @@ namespace Hierarchy.Services.Data
 				}).ToList()
 			};
 		}
-	}
+
+        public async Task<DepartmentFormViewModel> GetDepartmentForEditAsync(Guid id)
+        {
+            Department department = await departmentRepository.GetDepartmentByIdAsync(id);
+
+            DepartmentFormViewModel model = new();
+            model.Name = department.Name;
+            model.Description = department.Description;
+
+            return model;
+        }
+    }
 }

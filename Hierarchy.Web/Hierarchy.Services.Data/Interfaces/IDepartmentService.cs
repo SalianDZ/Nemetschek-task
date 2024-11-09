@@ -11,5 +11,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task<IEnumerable<DepartmentSelectViewModel>> GetAllDepartmentsForSelectAsync();
         Task DeleteDepartmentAsync(Guid departmentId);
         Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid id);
+        Task<DepartmentFormViewModel> GetDepartmentForEditAsync(Guid id);
 	}
 }

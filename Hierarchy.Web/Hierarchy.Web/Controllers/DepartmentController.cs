@@ -1,5 +1,4 @@
-﻿using Hierarchy.Services.Data;
-using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Department;
 using Microsoft.AspNetCore.Mvc;
 
@@ -123,6 +122,25 @@ namespace Hierarchy.Web.Controllers
             {
                 TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Delete", "Department");
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                DepartmentFormViewModel model = await departmentService.GetDepartmentForEditAsync(correctId);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
     }
