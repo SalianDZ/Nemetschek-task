@@ -143,5 +143,24 @@ namespace Hierarchy.Web.Controllers
                 return NotFound("An error occured during the process of connecting to the database!");
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(DepartmentFormViewModel model, string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                await departmentService.UpdateDepartmentAsync(model, correctId);
+                return RedirectToAction("All", "Department");
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
+        }
     }
 }

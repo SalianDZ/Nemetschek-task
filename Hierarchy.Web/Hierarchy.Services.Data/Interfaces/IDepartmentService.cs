@@ -12,5 +12,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task DeleteDepartmentAsync(Guid departmentId);
         Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid id);
         Task<DepartmentFormViewModel> GetDepartmentForEditAsync(Guid id);
+        Task UpdateDepartmentAsync(DepartmentFormViewModel model, Guid id);
 	}
 }

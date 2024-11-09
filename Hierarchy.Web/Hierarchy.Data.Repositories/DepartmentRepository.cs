@@ -1,5 +1,6 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
+using Hierarchy.Web.Models.Department;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hierarchy.Data.Repositories
@@ -39,12 +40,6 @@ namespace Hierarchy.Data.Repositories
             return await context.Departments.FindAsync(id);
         }
 
-        public async Task UpdateDepartmentAsync(Department department)
-        {
-            context.Departments.Update(department);
-            await context.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<Department>> GetAllDepartmentsWithEmployeesAsync()
         {
             return await context.Departments
@@ -69,6 +64,14 @@ namespace Hierarchy.Data.Repositories
         {
             Department department = await context.Departments.FirstAsync(d => d.Id == id);
             return department.Employees.Any();
+        }
+
+        public async Task UpdateDepartmentAsync(DepartmentFormViewModel model, Guid id)
+        {
+            Department department = await GetDepartmentByIdAsync(id);
+            department.Name = model.Name;
+            department.Description = model.Description;
+            await context.SaveChangesAsync();
         }
     }
 }

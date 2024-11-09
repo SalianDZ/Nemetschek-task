@@ -108,5 +108,10 @@ namespace Hierarchy.Services.Data
 
             return model;
         }
+
+        public async Task UpdateDepartmentAsync(DepartmentFormViewModel model, Guid id)
+        {
+           await departmentRepository.UpdateDepartmentAsync(model, id);
+        }
     }
 }

@@ -9,6 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Hierarchy.Data.Models\Hierarchy.Data.Models.csproj" />
     <ProjectReference Include="..\Hierarchy.Data\Hierarchy.Data.csproj" />
+    <ProjectReference Include="..\Hierarchy.Web.Models\Hierarchy.Web.Models.csproj" />
   </ItemGroup>
 
 </Project>
