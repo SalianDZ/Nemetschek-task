@@ -96,5 +96,22 @@ namespace Hierarchy.Services.Data
 				}).ToList()
 			};
 		}
-	}
+
+        public async Task<PositionFormViewModel> GetPositionForEditAsync(Guid id)
+        {
+            Position position = await positionRepository.GetPositionByIdAsync(id);
+			PositionFormViewModel model = new();
+
+			model.Name = position.Name;
+			model.Rank = position.Rank;
+			model.IsSupervisor = position.IsSupervisor;
+
+			return model;
+        }
+
+        public async Task UpdateDepartmentAsync(PositionFormViewModel model, Guid id)
+        {
+			await positionRepository.UpdatePositionAsync(model, id);
+        }
+    }
 }

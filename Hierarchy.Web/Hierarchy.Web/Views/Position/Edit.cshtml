@@ -1,0 +1,40 @@
+﻿@model PositionFormViewModel
+
+<h2>Edit Position</h2>
+
+<div class="row">
+    <div class="col-md-8 offset-md-2">
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="alert alert-danger">
+                @TempData["ErrorMessage"]
+            </div>
+        }
+
+        <form asp-action="Edit" method="post">
+            <!-- Position Name -->
+            <div class="form-group">
+                <label asp-for="Name"></label>
+                <input asp-for="Name" class="form-control" placeholder="Position name..." />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <!-- Position Rank -->
+            <div class="form-group">
+                <label asp-for="Rank"></label>
+                <input asp-for="Rank" type="number" class="form-control" placeholder="Enter position rank..." />
+                <span asp-validation-for="Rank" class="text-danger"></span>
+            </div>
+
+            <!-- Is Supervisor Checkbox -->
+            <div class="form-group form-check">
+                <input asp-for="IsSupervisor" type="checkbox" class="form-check-input" id="IsSupervisorCheckbox" />
+                <label asp-for="IsSupervisor" class="form-check-label">Is Supervisor</label>
+            </div>
+
+            <!-- Submit and Cancel Buttons -->
+            <button type="submit" class="btn btn-primary">Save</button>
+            <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+        </form>
+    </div>
+</div>

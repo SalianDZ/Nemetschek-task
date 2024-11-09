@@ -1,5 +1,6 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
+using Hierarchy.Web.Models.Position;
 using Microsoft.EntityFrameworkCore;
 
 namespace Hierarchy.Data.Repositories
@@ -58,9 +59,12 @@ namespace Hierarchy.Data.Repositories
 				.FirstOrDefaultAsync(p => p.Id == positionId);
 		}
 
-		public async Task UpdatePositionAsync(Position position)
+		public async Task UpdatePositionAsync(PositionFormViewModel model, Guid id)
         {
-            context.Positions.Update(position);
+            Position position = await GetPositionByIdAsync(id);
+            position.Name = model.Name;
+            position.Rank = model.Rank;
+            position.IsSupervisor = model.IsSupervisor;
             await context.SaveChangesAsync();
         }
     }

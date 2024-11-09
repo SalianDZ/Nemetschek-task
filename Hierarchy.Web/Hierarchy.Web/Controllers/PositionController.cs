@@ -1,4 +1,6 @@
-﻿using Hierarchy.Services.Data.Interfaces;
+﻿using Hierarchy.Services.Data;
+using Hierarchy.Services.Data.Interfaces;
+using Hierarchy.Web.Models.Department;
 using Hierarchy.Web.Models.Position;
 using Microsoft.AspNetCore.Mvc;
 
@@ -119,6 +121,44 @@ namespace Hierarchy.Web.Controllers
 			{
                 TempData["ErrorMessage"] = ex.Message;
                 return RedirectToAction("Delete", "Position");
+            }
+        }
+
+		[HttpGet]
+		public async Task<IActionResult> Edit(string id)
+		{
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            try
+            {
+                PositionFormViewModel model = await positionService.GetPositionForEditAsync(correctId);
+                return View(model);
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
+        }
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(PositionFormViewModel model, string id)
+		{
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+			try
+			{
+                await positionService.UpdateDepartmentAsync(model, correctId);
+                return RedirectToAction("All", "Position");
+            }
+			catch (Exception)
+			{
+                return NotFound("An error occured during the process of connecting to the database!");
             }
         }
     }

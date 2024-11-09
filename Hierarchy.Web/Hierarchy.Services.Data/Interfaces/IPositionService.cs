@@ -10,5 +10,7 @@ namespace Hierarchy.Services.Data.Interfaces
 		Task<bool> DoesPositionExistAsync(string positionName);
 		Task<IEnumerable<PositionSelectViewModel>> GetAllPositionsForSelectAsync();
 		Task DeletePositionAsync(Guid positionId);
-	}
+		Task<PositionFormViewModel> GetPositionForEditAsync(Guid id);
+		Task UpdateDepartmentAsync(PositionFormViewModel model, Guid id);
+    }
 }
