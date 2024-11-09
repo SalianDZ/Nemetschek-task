@@ -1,4 +1,5 @@
 ﻿using Hierarchy.Data.Models;
+using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;
@@ -9,10 +10,12 @@ namespace Hierarchy.Services.Data
     public class PositionService : IPositionService
 	{
 		private readonly IPositionRepository positionRepository;
+		private readonly IEmployeeRepository employeeRepository;
 
-        public PositionService(IPositionRepository positionRepository)
+        public PositionService(IPositionRepository positionRepository, IEmployeeRepository employeeRepository)
         {
-			    this.positionRepository = positionRepository;
+            this.positionRepository = positionRepository;
+            this.employeeRepository = employeeRepository;
         }
 
         public async Task AddPositionAsync(PositionFormViewModel positionViewModel)
@@ -26,6 +29,18 @@ namespace Hierarchy.Services.Data
 
 			await positionRepository.AddPositionAsync(position);
 		}
+
+        public async Task DeletePositionAsync(Guid positionId)
+        {
+            var hasEmployees = await employeeRepository.HasEmployeesInPositionAsync(positionId);
+
+            if (hasEmployees)
+            {
+                throw new InvalidOperationException("Cannot delete position with associated employees.");
+            }
+
+            await positionRepository.DeletePositionAsync(positionId);
+        }
 
         public async Task<bool> DoesPositionExistAsync(string positionName)
         {

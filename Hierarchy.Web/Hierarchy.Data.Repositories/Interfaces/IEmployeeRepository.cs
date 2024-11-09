@@ -13,5 +13,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task DeleteEmployeeAsync(Guid id);
         Task<bool> DoesEmployeeExistByNameAsync(string name);
         Task<bool> HasEmployeesInDepartmentAsync(Guid departmentId);
+        Task<bool> HasEmployeesInPositionAsync(Guid positionId);
     }
 }

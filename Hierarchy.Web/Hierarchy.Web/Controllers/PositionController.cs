@@ -82,5 +82,44 @@ namespace Hierarchy.Web.Controllers
 				return NotFound("An error occured during the process of connecting to the database!");
 			}
 		}
-	}
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+            var position = await positionService.GetPositionDetailsAsync(correctId);
+
+            if (position == null)
+            {
+                return NotFound();
+            }
+
+            return View(position);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(string id)
+		{
+            if (!Guid.TryParse(id, out var correctId))
+            {
+                return NotFound("Please enter a valid id!");
+            }
+
+			try
+			{
+				await positionService.DeletePositionAsync(correctId);
+				return RedirectToAction("All", "Position");
+			}
+			catch (Exception ex)
+			{
+                TempData["ErrorMessage"] = ex.Message;
+                return RedirectToAction("Delete", "Position");
+            }
+        }
+    }
 }

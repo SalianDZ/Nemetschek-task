@@ -1,6 +1,7 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace Hierarchy.Data.Repositories
 {
@@ -71,6 +72,11 @@ namespace Hierarchy.Data.Repositories
         public async Task<bool> HasEmployeesInDepartmentAsync(Guid departmentId)
         {
             return await context.Employees.AnyAsync(e => e.DepartmentID == departmentId);
+        }
+
+        public async Task<bool> HasEmployeesInPositionAsync(Guid positionId)
+        {
+            return await context.Employees.AnyAsync(e => e.PositionID == positionId);
         }
 
         public async Task UpdateEmployeeAsync(Employee employee)
