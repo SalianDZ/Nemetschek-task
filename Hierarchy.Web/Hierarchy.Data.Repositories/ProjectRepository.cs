@@ -1,8 +1,7 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Repositories.Interfaces;
+using Hierarchy.Web.Models.Project;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Metadata.Ecma335;
-using System.Security.Principal;
 
 namespace Hierarchy.Data.Repositories
 {
@@ -67,9 +66,13 @@ namespace Hierarchy.Data.Repositories
                 .FirstOrDefaultAsync(p => p.Id == projectId);
         }
 
-        public async Task UpdateProjectAsync(Project project)
+        public async Task UpdateProjectAsync(ProjectEditViewModel model, Guid id)
         {
-            context.Projects.Update(project);
+            Project project = await GetProjectByIdAsync(id);
+            project.Name = model.Name;
+            project.Description = model.Description;
+            project.StartDate = model.Start;
+            project.EndDate = model.End;
             await context.SaveChangesAsync();
         }
     }

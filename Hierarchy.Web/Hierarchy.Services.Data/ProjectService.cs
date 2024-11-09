@@ -1,18 +1,20 @@
 ﻿using Hierarchy.Data.Models;
+using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;
 using Hierarchy.Web.Models.Project;
-using Microsoft.Identity.Client;
 
 namespace Hierarchy.Services.Data
 {
     public class ProjectService : IProjectService
     {
         private readonly IProjectRepository projectRepository;
-        public ProjectService(IProjectRepository projectRepository)
+        private readonly IEmployeeProjectRepository employeeProjectRepository;
+        public ProjectService(IProjectRepository projectRepository, IEmployeeProjectRepository employeeProjectRepository)
         {
             this.projectRepository = projectRepository;
+            this.employeeProjectRepository = employeeProjectRepository;
         }
 
         public async Task AddProjectAsync(ProjectFormViewModel model)
@@ -26,6 +28,24 @@ namespace Hierarchy.Services.Data
             };
 
             await projectRepository.AddProjectAsync(project);
+        }
+
+        public async Task DeleteProjectAsync(Guid projectId)
+        {
+            // Check if there are any associated EmployeeProject entries
+            var hasAssociations = await employeeProjectRepository.HasAssociationsWithProjectAsync(projectId);
+            if (hasAssociations)
+            {
+                // Delete related entries in EmployeeProject mapping table
+                await employeeProjectRepository.DeleteByProjectIdAsync(projectId);
+            }
+
+            // Delete the Project
+            var project = await projectRepository.GetProjectByIdAsync(projectId);
+            if (project != null)
+            {
+                await projectRepository.DeleteProjectAsync(projectId);
+            }
         }
 
         public async Task<bool> DoesProjectExistAsync(string name)
@@ -68,6 +88,24 @@ namespace Hierarchy.Services.Data
                     Position = ep.Employee.Position?.Name
                 }).ToList()
             };
+        }
+
+        public async Task<ProjectEditViewModel> GetProjectForEditAsync(Guid id)
+        {
+            Project project = await projectRepository.GetProjectByIdAsync(id);
+            ProjectEditViewModel model = new()
+            {
+                Name = project.Name,
+                Description = project.Description,
+                Start = project.StartDate,
+                End = project.EndDate
+            };
+            return model;
+        }
+
+        public async Task UpdateProjectAsync(ProjectEditViewModel model, Guid id)
+        {
+            await projectRepository.UpdateProjectAsync(model, id);
         }
     }
 }

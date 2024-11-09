@@ -13,6 +13,13 @@ namespace Hierarchy.Data.Repositories
             this.context = context;
         }
 
+        public async Task DeleteByProjectIdAsync(Guid projectId)
+        {
+            var associations = context.EmployeeProjects.Where(ep => ep.ProjectID == projectId);
+            context.EmployeeProjects.RemoveRange(associations);
+            await context.SaveChangesAsync();
+        }
+
         public async Task<IEnumerable<EmployeeProject>> GetEmployeeProjectsByEmployeeIdAsync(Guid employeeId)
         {
             return await context.Set<EmployeeProject>()
@@ -25,6 +32,11 @@ namespace Hierarchy.Data.Repositories
             return await context.Set<EmployeeProject>()
                 .Where(ep => ep.ProjectID == projectId)
                 .ToListAsync();
+        }
+
+        public async Task<bool> HasAssociationsWithProjectAsync(Guid projectId)
+        {
+            return await context.EmployeeProjects.AnyAsync(ep => ep.ProjectID == projectId);
         }
     }
 }

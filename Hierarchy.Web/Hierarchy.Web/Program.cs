@@ -23,6 +23,7 @@ namespace Hierarchy.Web
 			builder.Services.AddScoped<IPositionRepository, PositionRepository>();
             builder.Services.AddScoped<IProjectRepository, ProjectRepository>();
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IEmployeeProjectRepository, EmployeeProjectRepository>();
 
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
 			builder.Services.AddScoped<IPositionService, PositionService>();

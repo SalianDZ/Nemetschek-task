@@ -8,5 +8,7 @@ namespace Hierarchy.Data.Repositories.Interfaces
         //Task RemoveEmployeeFromProjectAsync(Guid employeeId, Guid projectId);
         Task<IEnumerable<EmployeeProject>> GetEmployeeProjectsByEmployeeIdAsync(Guid employeeId);
         Task<IEnumerable<EmployeeProject>> GetEmployeeProjectsByProjectIdAsync(Guid projectId);
+        Task<bool> HasAssociationsWithProjectAsync(Guid projectId);
+        Task DeleteByProjectIdAsync(Guid projectId);
     }
 }

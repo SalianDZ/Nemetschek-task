@@ -9,5 +9,8 @@ namespace Hierarchy.Services.Data.Interfaces
         Task AddProjectAsync(ProjectFormViewModel projectViewModel);
         Task<bool> DoesProjectExistAsync(string name);
         Task<bool> DoesProjectExistByIdAsync(string id);
+        Task DeleteProjectAsync(Guid projectId);
+        Task<ProjectEditViewModel> GetProjectForEditAsync(Guid id);
+        Task UpdateProjectAsync(ProjectEditViewModel model, Guid id);
     }
 }
