@@ -7,7 +7,17 @@
         <h4>@Model.Name</h4>
         <p><strong>Position:</strong> @Model.Position</p>
         <p><strong>Department:</strong> @Model.Department</p>
-        <p><strong>Supervisor:</strong> @(string.IsNullOrEmpty(Model.Supervisor) ? "None" : Model.Supervisor)</p>
+
+        @if (string.IsNullOrEmpty(Model.Supervisor))
+        {
+            <p><strong>Supervisor Status:</strong> This employee is the supervisor.</p>
+        }
+        else
+        {
+            <p><strong>Supervisor Status:</strong> This employee is not the supervisor.</p>
+            <p><strong>Supervisor:</strong> @Model.Supervisor</p>
+        }
+
         <p><strong>Experience:</strong> @Model.ExperienceYears years</p>
         <p><strong>Gender:</strong> @Model.Gender</p>
     </div>

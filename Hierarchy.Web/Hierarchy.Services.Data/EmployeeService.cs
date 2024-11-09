@@ -1,6 +1,5 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Data.Models.Enums;
-using Hierarchy.Data.Repositories;
 using Hierarchy.Data.Repositories.Interfaces;
 using Hierarchy.Services.Data.Interfaces;
 using Hierarchy.Web.Models.Employee;
@@ -69,6 +68,7 @@ namespace Hierarchy.Services.Data
         public async Task<EmployeeDetailViewModel> GetEmployeeDetailsAsync(Guid employeeId)
         {
             var employee = await employeeRepository.GetEmployeeWithDetailsByIdAsync(employeeId);
+
             if (employee == null) return null;
 
             return new EmployeeDetailViewModel
@@ -76,7 +76,7 @@ namespace Hierarchy.Services.Data
                 Name = employee.Name,
                 Position = employee.Position?.Name ?? "N/A",
                 Department = employee.Department?.Name ?? "N/A",
-                Supervisor = employee.Supervisor?.Name ?? "None",
+                Supervisor = employee.Supervisor?.Name ?? null!,
                 ExperienceYears = employee.ExperienceYears,
                 Gender = employee.Gender.ToString(),
                 Subordinates = employee.Subordinates.Select(s => new EmployeeViewModel
@@ -103,7 +103,5 @@ namespace Hierarchy.Services.Data
                 new GenderOptions { Value = 4, Text = "Other" }
             };
         }
-
-
     }
 }
