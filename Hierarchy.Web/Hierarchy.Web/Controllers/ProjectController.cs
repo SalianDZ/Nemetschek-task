@@ -172,8 +172,22 @@ namespace Hierarchy.Web.Controllers
                 return View(model);
             }
 
-            await projectService.AssignProjectToEmployeeAsync(model.EmployeeId, model.ProjectId);
-            return RedirectToAction("All", "Project");
+            bool result = await projectService.IsProjectAlreadyAssignedToEmployeeByIdAsync(model.EmployeeId, model.ProjectId);
+
+            if (result)
+            {
+                return NotFound("The employee is already working on this project!");
+            }
+
+            try
+            {
+                await projectService.AssignProjectToEmployeeAsync(model.EmployeeId, model.ProjectId);
+                return RedirectToAction("All", "Project");
+            }
+            catch (Exception)
+            {
+                return NotFound("An error occured during the process of connecting to the database!");
+            }
         }
     }
 }

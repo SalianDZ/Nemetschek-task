@@ -15,5 +15,6 @@ namespace Hierarchy.Data.Repositories.Interfaces
         Task<bool> DoesProjectExistAsync(string name);
         Task<bool> DoesProjectExistByIdAsync(string id);
         Task AssignProjectToEmployee(Guid employeeId, Guid projectId);
+        Task<bool> IsProjectAlreadyAssignedToEmployeeByIdAsync(Guid projectId, Guid employeeId);
     }
 }

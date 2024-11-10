@@ -14,5 +14,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task UpdateProjectAsync(ProjectEditViewModel model, Guid id);
         Task<IEnumerable<ProjectSelectViewModel>> GetAllProjectsForSelectAsync();
         Task AssignProjectToEmployeeAsync(Guid employeeId, Guid projectId);
+        Task<bool> IsProjectAlreadyAssignedToEmployeeByIdAsync(Guid employeeId, Guid projectId);
     }
 }

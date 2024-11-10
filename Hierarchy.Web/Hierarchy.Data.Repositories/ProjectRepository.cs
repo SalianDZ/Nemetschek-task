@@ -78,6 +78,13 @@ namespace Hierarchy.Data.Repositories
                 .FirstOrDefaultAsync(p => p.Id == projectId);
         }
 
+        public async Task<bool> IsProjectAlreadyAssignedToEmployeeByIdAsync(Guid employeeId, Guid projectId)
+        {
+            return await context.EmployeeProjects
+                .AnyAsync(ep => ep.EmployeeID == employeeId
+                && ep.ProjectID == projectId);
+        }
+
         public async Task UpdateProjectAsync(ProjectEditViewModel model, Guid id)
         {
             Project project = await GetProjectByIdAsync(id);

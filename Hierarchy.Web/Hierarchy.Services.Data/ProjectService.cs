@@ -120,6 +120,11 @@ namespace Hierarchy.Services.Data
             return model;
         }
 
+        public async Task<bool> IsProjectAlreadyAssignedToEmployeeByIdAsync(Guid employeeId, Guid projectId)
+        {
+            return await projectRepository.IsProjectAlreadyAssignedToEmployeeByIdAsync(employeeId, projectId);
+        }
+
         public async Task UpdateProjectAsync(ProjectEditViewModel model, Guid id)
         {
             await projectRepository.UpdateProjectAsync(model, id);
