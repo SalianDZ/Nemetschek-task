@@ -10,14 +10,14 @@
             <div class="col-md-6 col-lg-4">
                 <div class="card employee-card shadow border-0 rounded-4 h-100 position-relative overflow-hidden">
                     <!-- Floating Badge for Position -->
-                    <div class="position-badge bg-gradient-primary text-white rounded-pill animate-badge">
+                    <div class="position-badge bg-gradient-primary text-white rounded-pill animate-badge" style="z-index: 10;">
                         <i class="bi bi-briefcase-fill me-1"></i> @employee.Position
                     </div>
 
-                    <div class="card-body d-flex flex-column p-5" style="padding-top: 4rem;"> <!-- Adjust padding for badge -->
+                    <div class="card-body d-flex flex-column p-5 position-relative" style="padding-top: 4rem; z-index: 10;">
                         <!-- Employee Name and Icon with Link -->
                         <h5 class="fw-bold text-uppercase text-dark mb-3">
-                            <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="text-decoration-none text-primary">
+                            <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="text-decoration-none text-primary" style="position: relative; z-index: 10;">
                                 <i class="bi bi-person-circle me-2"></i> @employee.Name
                             </a>
                         </h5>
@@ -31,13 +31,13 @@
                             <span class="badge-gradient fw-semibold">Supervisor:</span>
                             <span class="text-muted ms-1">@(!string.IsNullOrEmpty(employee.Supervisor) ? employee.Supervisor : "None")</span>
                         </p>
-                        <!-- View Profile Button -->
-                        <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="btn btn-outline-primary mt-auto rounded-pill fw-bold employee-card-btn">
+                        <!-- View Profile Button with Adjusted Z-Index -->
+                        <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="btn btn-outline-primary mt-auto rounded-pill fw-bold employee-card-btn" style="position: relative; z-index: 10;">
                             View Profile <i class="bi bi-arrow-right ms-2"></i>
                         </a>
                     </div>
-                    <!-- Hover Overlay Icon -->
-                    <div class="hover-overlay">
+                    <!-- Hover Overlay Icon with Lower Z-Index -->
+                    <div class="hover-overlay" style="z-index: 5;">
                         <i class="bi bi-person-circle text-primary display-1"></i>
                     </div>
                 </div>
@@ -54,12 +54,13 @@
             background-color: #f8f9fc;
             position: relative;
         }
-        .employee-card:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.15);
-        }
 
-        /* Floating Position Badge */
+            .employee-card:hover {
+                transform: translateY(-6px) scale(1.05);
+                box-shadow: 0 15px 30px rgba(0, 123, 255, 0.15);
+            }
+
+        /* Floating Badge for Position */
         .position-badge {
             position: absolute;
             top: 1rem;
@@ -68,7 +69,6 @@
             font-size: 0.85rem;
             font-weight: 600;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            z-index: 10;
             background: linear-gradient(135deg, #007bff, #6a11cb);
             animation: float 1.5s infinite ease-in-out;
         }
@@ -95,6 +95,7 @@
             align-items: center;
             transition: opacity 0.3s ease;
         }
+
         .employee-card:hover .hover-overlay {
             opacity: 1;
         }
@@ -103,9 +104,10 @@
         .employee-card-btn {
             transition: background-color 0.3s ease, color 0.3s ease;
         }
-        .employee-card-btn:hover {
-            background-color: #007bff;
-            color: #fff;
-        }
+
+            .employee-card-btn:hover {
+                background-color: #007bff;
+                color: #fff;
+            }
     </style>
 }
