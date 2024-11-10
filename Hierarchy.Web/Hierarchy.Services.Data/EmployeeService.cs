@@ -60,6 +60,18 @@ namespace Hierarchy.Services.Data
             }).ToList();
         }
 
+        public async Task<IEnumerable<EmployeeSelectViewModel>> GetAllEmployeesForSelectAsync()
+        {
+            IEnumerable<Employee> allEmployees = await employeeRepository.GetAllEmployeesAsync();
+            IEnumerable<EmployeeSelectViewModel> model = allEmployees.Select(e => new EmployeeSelectViewModel
+            { 
+                Id = e.Id,
+                Name = e.Name
+            });
+
+            return model;
+        }
+
         public async Task<IEnumerable<SupervisorSelectViewModel>> GetAllSupervisorsForSelectAsync()
         {
             IEnumerable<Employee> allSupervisors = await employeeRepository.GetAllSupervisorsAsync();
@@ -78,6 +90,7 @@ namespace Hierarchy.Services.Data
 
             return new EmployeeDetailViewModel
             {
+                Id = employee.Id,
                 Name = employee.Name,
                 Position = employee.Position?.Name ?? "N/A",
                 Department = employee.Department?.Name ?? "N/A",

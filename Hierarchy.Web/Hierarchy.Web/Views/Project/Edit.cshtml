@@ -1,48 +1,52 @@
 ﻿@model ProjectEditViewModel
 
-<h2>Edit Project</h2>
+@{
+    ViewData["Title"] = "Edit Project";
+}
 
-<div class="row">
-    <div class="col-md-8 offset-md-2">
-        @if (TempData["ErrorMessage"] != null)
-        {
-            <div class="alert alert-danger">
-                @TempData["ErrorMessage"]
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 mt-5">
+            <div class="card-header bg-primary text-white text-center rounded-top">
+                <h3 class="mb-0">@ViewData["Title"]</h3>
+                <small class="text-light">Modify the details of this project within the company’s project list</small>
             </div>
-        }
+            <div class="card-body p-5">
+                <form method="post">
+                    <!-- Project Name Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Name" class="form-label fw-semibold">Project Name</label>
+                        <small class="text-muted d-block mb-2">Update the name of the project, e.g., "Website Redesign".</small>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 rounded-start">
+                                <i class="bi bi-file-earmark-text text-secondary"></i> <!-- Icon for Project Name -->
+                            </span>
+                            <input asp-for="Name" class="form-control border-start-0 rounded-end" placeholder="Project Name" />
+                        </div>
+                        <span asp-validation-for="Name" class="small text-danger"></span>
+                    </div>
 
-        <form asp-action="Edit" method="post">
-            <!-- Project Name -->
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" placeholder="Project name..." />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                    <!-- Project Description Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Description" class="form-label fw-semibold">Project Description</label>
+                        <small class="text-muted d-block mb-2">Update the project description to reflect any changes in goals or scope.</small>
+                        <textarea asp-for="Description" class="form-control rounded-3" rows="4" placeholder="Description of the project"></textarea>
+                        <span asp-validation-for="Description" class="small text-danger"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-save me-1"></i>
+                            Save Changes
+                        </button>
+                    </div>
+                </form>
             </div>
-
-            <!-- Project Description -->
-            <div class="form-group">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" rows="3" class="form-control" placeholder="Project description..."></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-
-            <!-- Start Date -->
-            <div class="form-group">
-                <label asp-for="Start"></label>
-                <input asp-for="Start" type="date" class="form-control" />
-                <span asp-validation-for="Start" class="text-danger"></span>
-            </div>
-
-            <!-- End Date -->
-            <div class="form-group">
-                <label asp-for="End"></label>
-                <input asp-for="End" type="date" class="form-control" />
-                <span asp-validation-for="End" class="text-danger"></span>
-            </div>
-
-            <!-- Submit and Cancel Buttons -->
-            <button type="submit" class="btn btn-primary">Save</button>
-            <a asp-action="All" class="btn btn-secondary">Cancel</a>
-        </form>
+        </div>
     </div>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

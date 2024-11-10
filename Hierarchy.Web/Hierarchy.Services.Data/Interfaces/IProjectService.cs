@@ -12,5 +12,7 @@ namespace Hierarchy.Services.Data.Interfaces
         Task DeleteProjectAsync(Guid projectId);
         Task<ProjectEditViewModel> GetProjectForEditAsync(Guid id);
         Task UpdateProjectAsync(ProjectEditViewModel model, Guid id);
+        Task<IEnumerable<ProjectSelectViewModel>> GetAllProjectsForSelectAsync();
+        Task AssignProjectToEmployeeAsync(Guid employeeId, Guid projectId);
     }
 }

@@ -20,6 +20,18 @@ namespace Hierarchy.Data.Repositories
             await context.SaveChangesAsync();
         }
 
+        public async Task AssignProjectToEmployee(Guid employeeId, Guid projectId)
+        {
+            EmployeeProject employeeProject = new()
+            {
+                EmployeeID = employeeId,
+                ProjectID = projectId
+            };
+
+            await context.EmployeeProjects.AddAsync(employeeProject);
+            await context.SaveChangesAsync();
+        }
+
         public async Task DeleteProjectAsync(Guid id)
         {
             var project = await GetProjectByIdAsync(id);

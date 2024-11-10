@@ -29,6 +29,11 @@ namespace Hierarchy.Services.Data
             await projectRepository.AddProjectAsync(project);
         }
 
+        public async Task AssignProjectToEmployeeAsync(Guid employeeId, Guid projectId)
+        {
+            await projectRepository.AssignProjectToEmployee(employeeId, projectId);
+        }
+
         public async Task DeleteProjectAsync(Guid projectId)
         {
             // Check if there are any associated EmployeeProject entries
@@ -69,6 +74,18 @@ namespace Hierarchy.Services.Data
             }).ToList();
         }
 
+        public async Task<IEnumerable<ProjectSelectViewModel>> GetAllProjectsForSelectAsync()
+        {
+            IEnumerable<Project> allProjects = await projectRepository.GetAllProjectsAsync();
+            IEnumerable<ProjectSelectViewModel> model = allProjects.Select(p => new ProjectSelectViewModel
+            {
+                Id = p.Id,
+                Name = p.Name
+            });
+
+            return model;
+        }
+
         public async Task<ProjectDetailViewModel> GetProjectDetailsAsync(Guid projectId)
         {
             var project = await projectRepository.GetProjectWithEmployeesByIdAsync(projectId);
@@ -77,6 +94,7 @@ namespace Hierarchy.Services.Data
 
             return new ProjectDetailViewModel
             {
+                Id = projectId,
                 Name = project.Name,
                 Description = project.Description,
                 StartDate = project.StartDate,

@@ -1,18 +1,21 @@
 ﻿using Hierarchy.Data.Models;
 using Hierarchy.Services.Data;
 using Hierarchy.Services.Data.Interfaces;
-using Hierarchy.Web.Models.Department;
 using Hierarchy.Web.Models.Project;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Hierarchy.Web.Controllers
 {
     public class ProjectController : Controller
     {
         private readonly IProjectService projectService;
-        public ProjectController(IProjectService projectService)
+        private readonly IEmployeeService employeeService;
+
+        public ProjectController(IProjectService projectService, IEmployeeService employeeService)
         {
             this.projectService = projectService;
+            this.employeeService = employeeService;
         }
 
         public async Task<IActionResult> All()
@@ -145,6 +148,32 @@ namespace Hierarchy.Web.Controllers
             {
                 return NotFound("An error occured during the process of connecting to the database!");
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AssignProject()
+        {
+            AssignProjectViewModel model = new()
+            {
+                Employees = await employeeService.GetAllEmployeesForSelectAsync(),
+                Projects = await projectService.GetAllProjectsForSelectAsync()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AssignProject(AssignProjectViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                model.Employees = await employeeService.GetAllEmployeesForSelectAsync();
+                model.Projects = await projectService.GetAllProjectsForSelectAsync();
+                return View(model);
+            }
+
+            await projectService.AssignProjectToEmployeeAsync(model.EmployeeId, model.ProjectId);
+            return RedirectToAction("All", "Project");
         }
     }
 }

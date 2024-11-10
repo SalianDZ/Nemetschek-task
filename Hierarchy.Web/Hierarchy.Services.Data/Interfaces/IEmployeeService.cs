@@ -14,5 +14,6 @@ namespace Hierarchy.Services.Data.Interfaces
         Task<bool> DoesDepartmentHaveAnyEmployeesAsync(Guid departmentId);
         Task<EmployeeFormViewModel> GetEmployeeForEditAsync(Guid id);
         Task UpdateEmployeeAsync(EmployeeFormViewModel model, Guid id);
+        Task<IEnumerable<EmployeeSelectViewModel>> GetAllEmployeesForSelectAsync();
     }
 }

@@ -1,0 +1,51 @@
+﻿@model AssignProjectViewModel
+
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 mt-5">
+            <div class="card-header bg-primary text-white text-center rounded-top">
+                <h3 class="mb-0">Assign Project to Employee</h3>
+                <small class="text-light">Select an employee and project to assign</small>
+            </div>
+            <div class="card-body p-5">
+                <form asp-action="AssignProject" method="post">
+                    <!-- Employee Dropdown -->
+                    <div class="form-group mb-4">
+                        <label asp-for="EmployeeId" class="form-label fw-semibold">Employee</label>
+                        <select asp-for="EmployeeId" class="form-control rounded">
+                            @foreach (var employee in Model.Employees)
+                            {
+                                <option value="@employee.Id">@employee.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="EmployeeId" class="small text-danger"></span>
+                    </div>
+
+                    <!-- Project Dropdown -->
+                    <div class="form-group mb-4">
+                        <label asp-for="ProjectId" class="form-label fw-semibold">Project</label>
+                        <select asp-for="ProjectId" class="form-control rounded">
+                            @foreach (var project in Model.Projects)
+                            {
+                                <option value="@project.Id">@project.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="ProjectId" class="small text-danger"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Assign Project
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -87,6 +87,7 @@ namespace Hierarchy.Services.Data
 			// Map to DepartmentDetailViewModel
 			return new DepartmentDetailViewModel
 			{
+                Id = departmentId,
 				Name = department.Name,
 				Description = department.Description,
 				Employees = department.Employees?.Select(e => new EmployeeViewModel

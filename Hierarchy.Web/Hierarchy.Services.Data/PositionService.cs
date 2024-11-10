@@ -86,6 +86,7 @@ namespace Hierarchy.Services.Data
 
 			return new PositionDetailViewModel
 			{
+				Id = positionId,
 				Name = position.Name,
 				Rank = position.Rank.ToString(),
 				IsSupervisor = position.IsSupervisor,
