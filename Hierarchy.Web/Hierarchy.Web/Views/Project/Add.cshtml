@@ -1,32 +1,52 @@
 ﻿@model ProjectFormViewModel
 
 @{
-	ViewData["Title"] = "Add Project";
+    ViewData["Title"] = "Add Project";
 }
 
-<h2 class="text-center">@ViewData["Title"]</h2>
-<hr />
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 mt-5">
+            <div class="card-header bg-primary text-white text-center rounded-top">
+                <h3 class="mb-0">@ViewData["Title"]</h3>
+                <small class="text-light">Enter project details to add it to the company’s project list</small>
+            </div>
+            <div class="card-body p-5">
+                <form method="post">
+                    <!-- Project Name Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Name" class="form-label fw-semibold">Project Name</label>
+                        <small class="text-muted d-block mb-2">Give the project a unique and descriptive name, e.g., "Website Redesign".</small>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 rounded-start">
+                                <i class="bi bi-file-earmark-text text-secondary"></i> <!-- Icon for Project Name -->
+                            </span>
+                            <input asp-for="Name" class="form-control border-start-0 rounded-end" placeholder="Project Name" />
+                        </div>
+                        <span asp-validation-for="Name" class="small text-danger"></span>
+                    </div>
 
-<div class="row">
-	<div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-		<form method="post">
-			<div class="form-group">
-				<label asp-for="Name"></label>
-				<input asp-for="Name" class="form-control" placeholder="Name of the Project...">
-				<span asp-validation-for="Name" class="small text-danger"></span>
-			</div>
-			<div class="form-group">
-				<label asp-for="Description"></label>
-				<input asp-for="Description" class="form-control" placeholder="Description of the Project...">
-				<span asp-validation-for="Description" class="small text-danger"></span>
-			</div>
-			<div class="text-center">
-				<input class="btn btn-primary mt-3" type="submit" value="Save" />
-			</div>
-		</form>
-	</div>
+                    <!-- Project Description Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Description" class="form-label fw-semibold">Project Description</label>
+                        <small class="text-muted d-block mb-2">Provide a brief overview of the project goals and scope.</small>
+                        <textarea asp-for="Description" class="form-control rounded-3" rows="4" placeholder="Description of the project"></textarea>
+                        <span asp-validation-for="Description" class="small text-danger"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Save Project
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 
 @section Scripts {
-	<partial name="_ValidationScriptsPartial" />
+    <partial name="_ValidationScriptsPartial" />
 }

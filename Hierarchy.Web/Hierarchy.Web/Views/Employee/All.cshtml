@@ -1,31 +1,111 @@
 ﻿@model IEnumerable<EmployeeListViewModel>
 
-<h2>All Employees</h2>
+<h1 class="text-center my-5 display-5 fw-bold text-primary">Our Dedicated Team</h1>
+<p class="text-center text-muted mb-5">Meet the professionals who drive our company's vision and success.</p>
 
-<div class="table-responsive">
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Department</th>
-                <th>Supervisor</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var employee in Model)
-            {
-                <tr>
-                    <td>
-                        <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })">
-                            @employee.Name
+<div class="container">
+    <div class="row g-4">
+        @foreach (var employee in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card employee-card shadow border-0 rounded-4 h-100 position-relative overflow-hidden">
+                    <!-- Floating Badge for Position -->
+                    <div class="position-badge bg-gradient-primary text-white rounded-pill animate-badge">
+                        <i class="bi bi-briefcase-fill me-1"></i> @employee.Position
+                    </div>
+
+                    <div class="card-body d-flex flex-column p-5" style="padding-top: 4rem;"> <!-- Adjust padding for badge -->
+                        <!-- Employee Name and Icon with Link -->
+                        <h5 class="fw-bold text-uppercase text-dark mb-3">
+                            <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="text-decoration-none text-primary">
+                                <i class="bi bi-person-circle me-2"></i> @employee.Name
+                            </a>
+                        </h5>
+                        <!-- Department Information with Gradient Label -->
+                        <p class="mb-2">
+                            <span class="badge-gradient fw-semibold">Department:</span>
+                            <span class="text-muted ms-1">@employee.Department</span>
+                        </p>
+                        <!-- Supervisor Information with Gradient Label -->
+                        <p class="mb-3">
+                            <span class="badge-gradient fw-semibold">Supervisor:</span>
+                            <span class="text-muted ms-1">@(!string.IsNullOrEmpty(employee.Supervisor) ? employee.Supervisor : "None")</span>
+                        </p>
+                        <!-- View Profile Button -->
+                        <a href="@Url.Action("Details", "Employee", new { id = employee.EmployeeID })" class="btn btn-outline-primary mt-auto rounded-pill fw-bold employee-card-btn">
+                            View Profile <i class="bi bi-arrow-right ms-2"></i>
                         </a>
-                    </td>
-                    <td>@employee.Position</td>
-                    <td>@employee.Department</td>
-                    <td>@(string.IsNullOrEmpty(employee.Supervisor) ? "None" : employee.Supervisor)</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+                    </div>
+                    <!-- Hover Overlay Icon -->
+                    <div class="hover-overlay">
+                        <i class="bi bi-person-circle text-primary display-1"></i>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
+
+@section Scripts {
+    <style>
+        /* Employee Card Styling */
+        .employee-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-color: #f8f9fc;
+            position: relative;
+        }
+        .employee-card:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.15);
+        }
+
+        /* Floating Position Badge */
+        .position-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            background: linear-gradient(135deg, #007bff, #6a11cb);
+            animation: float 1.5s infinite ease-in-out;
+        }
+
+        /* Gradient Label Styling for Department and Supervisor */
+        .badge-gradient {
+            background: linear-gradient(135deg, #007bff, #6a11cb);
+            -webkit-background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+
+        /* Hover Overlay Icon */
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 123, 255, 0.05);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .employee-card:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        /* Button Hover Effect */
+        .employee-card-btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .employee-card-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+}

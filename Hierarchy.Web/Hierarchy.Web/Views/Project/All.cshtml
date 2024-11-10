@@ -1,25 +1,101 @@
 ﻿@model IEnumerable<ProjectListViewModel>
 
-<h2>All Projects</h2>
+<h1 class="text-center my-5 display-5 fw-bold text-primary">Our Projects</h1>
+<p class="text-center text-muted mb-5">Discover the impactful projects that are shaping our company’s future.</p>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Project Name</th>
-            <th>Number of Employees</th>
-        </tr>
-    </thead>
-    <tbody>
+<div class="container">
+    <div class="row g-4">
         @foreach (var project in Model)
         {
-            <tr>
-                <td>
-                    <a href="@Url.Action("Details", "Project", new { id = project.ProjectID })">
-                        @project.Name
-                    </a>
-                </td>
-                <td>@project.EmployeeCount</td>
-            </tr>
+            <div class="col-md-6 col-lg-4">
+                <div class="card project-card shadow border-0 rounded-4 h-100 position-relative overflow-hidden">
+                    <!-- Floating Badge for Employee Count -->
+                    <div class="project-badge bg-gradient-primary text-white rounded-pill animate-badge">
+                        <i class="bi bi-people-fill me-1"></i> @project.EmployeeCount Members
+                    </div>
+
+                    <div class="card-body d-flex flex-column p-5 position-relative" style="padding-top: 4rem; z-index: 10;"> <!-- Adjusted z-index -->
+                        <!-- Project Name with Icon and Link -->
+                        <h5 class="fw-bold text-uppercase text-dark mb-2">
+                            <a href="@Url.Action("Details", "Project", new { id = project.ProjectID })" class="text-decoration-none text-primary" style="z-index: 10; position: relative;">
+                                <i class="bi bi-folder-fill me-2"></i> <!-- Icon for Project -->
+                                @project.Name
+                            </a>
+                        </h5>
+                        <!-- View Project Button with Explicit Route Binding and Adjusted Z-Index -->
+                        <a href="@Url.Action("Details", "Project", new { id = project.ProjectID })" class="btn btn-outline-primary mt-auto rounded-pill fw-bold project-card-btn" style="z-index: 10; position: relative;">
+                            View Project <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                    <!-- Hover Overlay Icon with Lower Z-Index -->
+                    <div class="hover-overlay" style="z-index: 5;">
+                        <i class="bi bi-folder-fill text-primary display-1"></i>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        /* Project Card Styling */
+        .project-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-color: #f8f9fc;
+            position: relative;
+        }
+        .project-card:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.15);
+        }
+
+        /* Floating Project Badge */
+        .project-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 15; /* Ensure badge is on top */
+            background: linear-gradient(135deg, #007bff, #6a11cb);
+            animation: float 1.5s infinite ease-in-out;
+        }
+
+        /* Float Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
+        /* Hover Overlay Icon */
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 123, 255, 0.05);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+            z-index: 5; /* Set below clickable elements */
+        }
+        .project-card:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        /* Button Hover Effect */
+        .project-card-btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .project-card-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+}

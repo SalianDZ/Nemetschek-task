@@ -1,81 +1,109 @@
 ﻿@model EmployeeFormViewModel
 
-<div class="row">
-    <div class="col-sm-12 offset-lg-2 col-lg-8 offset-xl-3 col-xl-6">
-        <form method="post">
-            <!-- Name Field -->
-            <div class="form-group">
-                <label asp-for="Name"></label>
-                <input asp-for="Name" class="form-control" placeholder="Enter full name..." />
-                <span asp-validation-for="Name" class="small text-danger"></span>
+<div class="row justify-content-center">
+    <div class="col-md-10 col-lg-8">
+        <div class="card shadow-lg border-0 rounded-4 mt-5">
+            <div class="card-header bg-primary text-white text-center rounded-top">
+                <h3 class="mb-0">Add Employee</h3>
+                <small class="text-light">Fill in the employee’s details to add them to the company structure</small>
             </div>
+            <div class="card-body p-5">
+                <form method="post">
+                    <!-- Name Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Name" class="form-label fw-semibold">Full Name</label>
+                        <small class="text-muted d-block mb-2">Enter the employee’s full name, e.g., John Doe.</small>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 rounded-start">
+                                <i class="bi bi-person text-secondary"></i>
+                            </span>
+                            <input asp-for="Name" class="form-control border-start-0 rounded-end" placeholder="Full Name" />
+                        </div>
+                        <span asp-validation-for="Name" class="small text-danger"></span>
+                    </div>
 
-            <!-- Gender Dropdown -->
-            <div class="form-group">
-                <label asp-for="Gender"></label>
-                <select asp-for="Gender" class="form-control">
-                    @foreach (var option in ViewBag.GenderOptions)
-                    {
-                        <option value="@option.Value">@option.Text</option>
-                    }
-                </select>
-                <span asp-validation-for="Gender" class="small text-danger"></span>
-            </div>
+                    <!-- Gender Dropdown -->
+                    <div class="form-group mb-4">
+                        <label asp-for="Gender" class="form-label fw-semibold">Gender</label>
+                        <select asp-for="Gender" class="form-control rounded">
+                            @foreach (var option in ViewBag.GenderOptions)
+                            {
+                                <option value="@option.Value">@option.Text</option>
+                            }
+                        </select>
+                        <span asp-validation-for="Gender" class="small text-danger"></span>
+                    </div>
 
-            <!-- Experience Years Field -->
-            <div class="form-group">
-                <label asp-for="ExperienceYears"></label>
-                <input asp-for="ExperienceYears" type="number" class="form-control" placeholder="Years of experience..." />
-                <span asp-validation-for="ExperienceYears" class="small text-danger"></span>
-            </div>
+                    <!-- Experience Years Field -->
+                    <div class="form-group mb-4">
+                        <label asp-for="ExperienceYears" class="form-label fw-semibold">Years of Experience</label>
+                        <small class="text-muted d-block mb-2">Enter the number of years the employee has worked in their field.</small>
+                        <div class="input-group">
+                            <span class="input-group-text bg-light border-end-0 rounded-start">
+                                <i class="bi bi-clock-history text-secondary"></i>
+                            </span>
+                            <input asp-for="ExperienceYears" type="number" class="form-control border-start-0 rounded-end" placeholder="Years of Experience" />
+                        </div>
+                        <span asp-validation-for="ExperienceYears" class="small text-danger"></span>
+                    </div>
 
-            <!-- Position Dropdown -->
-            <div class="form-group">
-                <label asp-for="PositionId"></label>
-                <select asp-for="PositionId" class="form-control">
-                    @foreach (var position in Model.Positions)
-                    {
-                        <option value="@position.Id">@position.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="PositionId" class="small text-danger"></span>
-            </div>
+                    <!-- Position Dropdown -->
+                    <div class="form-group mb-4">
+                        <label asp-for="PositionId" class="form-label fw-semibold">Position</label>
+                        <small class="text-muted d-block mb-2">Select the employee’s position within the company.</small>
+                        <select asp-for="PositionId" class="form-control rounded">
+                            @foreach (var position in Model.Positions)
+                            {
+                                <option value="@position.Id">@position.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="PositionId" class="small text-danger"></span>
+                    </div>
 
-            <!-- Department Dropdown -->
-            <div class="form-group">
-                <label asp-for="DepartmentId"></label>
-                <select asp-for="DepartmentId" class="form-control">
-                    @foreach (var department in Model.Departments)
-                    {
-                        <option value="@department.Id">@department.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="DepartmentId" class="small text-danger"></span>
-            </div>
+                    <!-- Department Dropdown -->
+                    <div class="form-group mb-4">
+                        <label asp-for="DepartmentId" class="form-label fw-semibold">Department</label>
+                        <small class="text-muted d-block mb-2">Select the department where the employee will work.</small>
+                        <select asp-for="DepartmentId" class="form-control rounded">
+                            @foreach (var department in Model.Departments)
+                            {
+                                <option value="@department.Id">@department.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="DepartmentId" class="small text-danger"></span>
+                    </div>
 
-            <!-- Is Supervisor Checkbox -->
-            <div class="form-group form-check">
-                <input asp-for="IsSupervisor" type="checkbox" class="form-check-input" id="IsSupervisorCheckbox" />
-                <label asp-for="IsSupervisor" class="form-check-label">Is Supervisor</label>
-            </div>
+                    <!-- Is Supervisor Checkbox -->
+                    <div class="form-group form-check mb-4">
+                        <input asp-for="IsSupervisor" type="checkbox" class="form-check-input" id="IsSupervisorCheckbox" />
+                        <label asp-for="IsSupervisor" class="form-check-label fw-semibold">Is Supervisor</label>
+                        <small class="text-muted d-block">Check if this role includes supervisory responsibilities.</small>
+                        <span asp-validation-for="IsSupervisor" class="small text-danger"></span>
+                    </div>
 
-            <!-- Conditional Supervisor Dropdown -->
-            <div class="form-group" id="SupervisorDropdown" style="display: none;">
-                <label asp-for="SupervisorId"></label>
-                <select asp-for="SupervisorId" class="form-control">
-                    @foreach (var supervisor in Model.Supervisors)
-                    {
-                        <option value="@supervisor.Id">@supervisor.Name</option>
-                    }
-                </select>
-                <span asp-validation-for="SupervisorId" class="small text-danger"></span>
-            </div>
+                    <!-- Conditional Supervisor Dropdown -->
+                    <div class="form-group mb-4" id="SupervisorDropdown" style="display: none;">
+                        <label asp-for="SupervisorId" class="form-label fw-semibold">Supervisor</label>
+                        <small class="text-muted d-block mb-2">If applicable, select the employee's supervisor.</small>
+                        <select asp-for="SupervisorId" class="form-control rounded">
+                            @foreach (var supervisor in Model.Supervisors)
+                            {
+                                <option value="@supervisor.Id">@supervisor.Name</option>
+                            }
+                        </select>
+                        <span asp-validation-for="SupervisorId" class="small text-danger"></span>
+                    </div>
 
-            <!-- Submit Button -->
-            <div class="text-center">
-                <input class="btn btn-primary mt-3" type="submit" value="Save" />
+                    <!-- Submit Button -->
+                    <div class="text-center mt-5">
+                        <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-check-circle me-1"></i>
+                            Save Employee
+                        </button>
+                    </div>
+                </form>
             </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -88,11 +116,7 @@
 
             // Function to toggle dropdown visibility
             function toggleSupervisorDropdown() {
-                if (isSupervisorCheckbox.checked) {
-                    supervisorDropdown.style.display = "none";
-                } else {
-                    supervisorDropdown.style.display = "block";
-                }
+                supervisorDropdown.style.display = isSupervisorCheckbox.checked ? "none" : "block";
             }
 
             // Event listener for checkbox change
@@ -102,4 +126,5 @@
             toggleSupervisorDropdown();
         });
     </script>
+    <partial name="_ValidationScriptsPartial" />
 }

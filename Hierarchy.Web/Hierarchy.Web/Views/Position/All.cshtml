@@ -1,14 +1,99 @@
 ﻿@model IEnumerable<PositionListViewModel>
 
-<h2>Positions</h2>
-<ul>
-    @foreach (var position in Model)
+<h1 class="text-center my-5 display-5 fw-bold text-primary">Available Positions</h1>
+<p class="text-center text-muted mb-5">Discover the roles that drive our company's success and explore opportunities to grow with us.</p>
 
-    {
-        <li>
-            <a href="@Url.Action("Details", "Position", new { id = position.PositionID })">
-                @position.Name
-            </a> - @position.EmployeeCount employees
-        </li>
-    }
-</ul>
+<div class="container">
+    <div class="row g-4">
+        @foreach (var position in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card position-card shadow border-0 rounded-4 h-100 position-relative overflow-hidden">
+                    <!-- Floating Animated Badge for Employee Count -->
+                    <div class="position-badge bg-gradient-primary text-white rounded-pill animate-badge">
+                        <i class="bi bi-people-fill me-1"></i> @position.EmployeeCount Employees
+                    </div>
+                    
+                    <div class="card-body d-flex flex-column p-5" style="padding-top: 4rem;"> <!-- Extra padding for badge space -->
+                        <!-- Position Name with Link -->
+                        <h5 class="fw-bold text-uppercase text-dark mb-3">
+                            <a href="@Url.Action("Details", "Position", new { id = position.PositionID })" class="text-decoration-none text-primary">
+                                <i class="bi bi-briefcase-fill me-2"></i> <!-- Icon for Position -->
+                                @position.Name
+                            </a>
+                        </h5>
+                        <p class="text-muted">A crucial role contributing expertise to our organizational success.</p>
+                        <!-- View Details Button with Arrow Icon -->
+                        <a href="@Url.Action("Details", "Position", new { id = position.PositionID })" class="btn btn-outline-primary mt-auto rounded-pill fw-bold position-card-btn">
+                            View Details <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                    <!-- Hover Overlay Icon -->
+                    <div class="hover-overlay">
+                        <i class="bi bi-briefcase text-primary display-1"></i>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@section Scripts {
+    <style>
+        /* Position Card Styling */
+        .position-card {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            background-color: #f8f9fc;
+            position: relative;
+        }
+        .position-card:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 0 15px 30px rgba(0, 123, 255, 0.15);
+        }
+
+        /* Floating Animated Badge for Employee Count */
+        .position-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+            background: linear-gradient(135deg, #007bff, #6a11cb);
+        }
+        /* Badge Animation */
+        .animate-badge {
+            animation: bounce 1.2s infinite;
+        }
+
+
+        /* Hover Overlay Icon */
+        .hover-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 123, 255, 0.05);
+            opacity: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.3s ease;
+        }
+        .position-card:hover .hover-overlay {
+            opacity: 1;
+        }
+
+        /* Button Hover Effect */
+        .position-card-btn {
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .position-card-btn:hover {
+            background-color: #007bff;
+            color: #fff;
+        }
+    </style>
+}
